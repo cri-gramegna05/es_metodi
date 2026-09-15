@@ -1,0 +1,429 @@
+<title>Lineapelle 111 per LORDH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#F5F4EF; --surface:#FFFFFF; --ink:#1B1E1C; --ink-2:#4A4F4B; --ink-3:#7A807B;
+  --line:#DCDBD3; --accent:#1F4D3A; --accent-ink:#FFFFFF; --accent-soft:#E3EEE7;
+  --amber:#8F5F14; --amber-soft:#F5EBD6; --grey-soft:#ECEBE5;
+  --stand-bg:#1B1E1C; --stand-ink:#F5F4EF;
+  --visited:#A9ADA8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151816; --surface:#1E2220; --ink:#E8E6DF; --ink-2:#B9BCB5; --ink-3:#83887F;
+    --line:#2F3531; --accent:#7FC2A0; --accent-ink:#0F1A15; --accent-soft:#1E3529;
+    --amber:#E0B56A; --amber-soft:#3A2E17; --grey-soft:#262A28;
+    --stand-bg:#E8E6DF; --stand-ink:#151816;
+    --visited:#5C625D;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151816; --surface:#1E2220; --ink:#E8E6DF; --ink-2:#B9BCB5; --ink-3:#83887F;
+  --line:#2F3531; --accent:#7FC2A0; --accent-ink:#0F1A15; --accent-soft:#1E3529;
+  --amber:#E0B56A; --amber-soft:#3A2E17; --grey-soft:#262A28;
+  --stand-bg:#E8E6DF; --stand-ink:#151816;
+  --visited:#5C625D;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:780px;margin:0 auto;padding-block:0 64px;padding-inline:16px}
+h1,h2,h3{font-family:"Fraunces","Iowan Old Style",Georgia,serif;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:700;line-height:1.1;font-variation-settings:"opsz" 144}
+h2{font-size:1.5rem;font-weight:700;line-height:1.2;margin-top:8px}
+h3{font-size:1.05rem;font-weight:700;line-height:1.3}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+header.top{padding-block:28px 18px;border-bottom:1px solid var(--line)}
+header.top .lead{color:var(--ink-2);margin-top:12px;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:.85rem;color:var(--ink-3)}
+.rules{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);padding:14px 16px}
+.rule .eyebrow{color:var(--accent)}
+.rule p{margin-top:6px;font-size:.92rem;color:var(--ink-2)}
+.rule strong{color:var(--ink)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);padding:6px 12px;border-radius:999px;font:inherit;font-size:.85rem;font-weight:500;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.progress{margin-left:auto;font-size:.85rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.progress b{color:var(--ink)}
+section.cat{padding-block:28px 8px;border-bottom:1px solid var(--line)}
+section.cat .intro{color:var(--ink-2);margin-top:8px;max-width:64ch}
+.group-label{margin:18px 0 8px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:8px}
+.group-label.dnp{color:var(--accent)}
+.group-label.sct{color:var(--amber)}
+.group-label i{display:inline-block;width:10px;height:10px;border-radius:50%;background:currentColor}
+.list{display:grid;gap:8px}
+.card{display:grid;grid-template-columns:96px 1fr;background:var(--surface);border:1px solid var(--line)}
+.card.visited{opacity:.55}
+.card.visited .name{text-decoration:line-through;text-decoration-color:var(--visited)}
+.stand{background:var(--stand-bg);color:var(--stand-ink);padding:10px 8px;display:flex;flex-direction:column;justify-content:flex-start;gap:2px;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.stand .hall{font-size:1.35rem;font-weight:600;line-height:1}
+.stand .pos{font-size:.72rem;font-weight:500;line-height:1.35;opacity:.85;overflow-wrap:anywhere}
+.body{padding:10px 12px 12px;min-width:0}
+.head{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.name{flex:1 1 auto;min-width:0}
+.pill{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill.dnp{background:var(--accent-soft);color:var(--accent)}
+.pill.sct{background:var(--amber-soft);color:var(--amber)}
+.where{font-size:.82rem;color:var(--ink-3);margin-top:2px;overflow-wrap:anywhere}
+.desc{margin-top:8px;font-size:.93rem}
+.why{margin-top:6px;font-size:.88rem;color:var(--ink-2);padding-left:10px;border-left:2px solid var(--line)}
+.check{margin-top:10px;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-2);cursor:pointer;user-select:none}
+.check input{width:16px;height:16px;accent-color:var(--accent);margin:0}
+details.drop{margin-top:14px;border:1px solid var(--line);background:var(--grey-soft)}
+details.drop summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:.9rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.drop summary::-webkit-details-marker{display:none}
+details.drop summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--ink-3)}
+details.drop[open] summary::after{content:"−"}
+details.drop ul{margin:0;padding:0 14px 12px 30px;font-size:.88rem;color:var(--ink-2)}
+details.drop li{margin-bottom:4px}
+details.drop li b{color:var(--ink)}
+.route{padding-block:24px 8px;border-bottom:1px solid var(--line)}
+.route .halls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}
+.hallbox{background:var(--surface);border:1px solid var(--line);padding:12px 14px}
+.hallbox .hall{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:1.2rem}
+.hallbox .n{font-size:.8rem;color:var(--ink-3);margin-left:6px}
+.hallbox ul{margin:8px 0 0;padding-left:0;list-style:none;font-size:.86rem}
+.hallbox li{display:flex;gap:8px;padding:3px 0;border-top:1px dashed var(--line)}
+.hallbox li:first-child{border-top:0}
+.hallbox li code{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ink-3);white-space:nowrap;min-width:64px}
+.hallbox li.done{color:var(--visited);text-decoration:line-through}
+footer{padding-block:24px;font-size:.82rem;color:var(--ink-3);max-width:66ch}
+.hidden{display:none!important}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .card{grid-template-columns:80px 1fr}
+  .stand .hall{font-size:1.15rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card{transition:opacity .2s}
+}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Fieramilano Rho · 15–17 settembre 2026 · padiglioni 9, 11, 13, 22, 24</div>
+  <h1>Lineapelle 111 per LORDH</h1>
+  <p class="lead">Guida rivista sul criterio LORDH: qualità vera a prezzo trattabile. Scarpa venduta a 195–225 €, quindi tomaia sotto i 6 € al piede e fornitori che servono un laboratorio, non una maison. Le griffe restano segnalate solo per sapere perché non ci si ferma.</p>
+  <div class="meta"><span>Fonte: catalogo espositori Lineapelle 111 (1.028 aziende) + ricerca online del 15 settembre</span><span>Stand da verificare sull'app ufficiale</span></div>
+  <div class="rules">
+    <div class="rule"><div class="eyebrow">Regola prezzo</div><p><strong>Tomaia:</strong> tetto 4–6 €/piede². <strong>Suola:</strong> chiedi il prezzo al kg del groppone e confronta tra i cuoifici toscani. <strong>Sopra gli 8 €/piede</strong> è materiale da bespoke, non da LORDH.</p></div>
+    <div class="rule"><div class="eyebrow">Tre domande a ogni stand</div><p><strong>1.</strong> Quantità minima e vendita a mezze pelli. <strong>2.</strong> Stock service e tempi. <strong>3.</strong> Seconda selezione o fine serie: stessa pelle, prezzo più basso.</p></div>
+    <div class="rule"><div class="eyebrow">Vantaggio casa</div><p>Concerie vicentine (Arzignano, Chiampo, Bassano) e componentisti padovani e trevigiani: <strong>campionature in giornata</strong> e ricarichi urgenti senza corriere.</p></div>
+  </div>
+</header>
+
+<div class="bar" id="bar">
+  <div class="chips" role="group" aria-label="Filtro">
+    <button class="chip" data-filter="all" aria-pressed="true">Tutte</button>
+    <button class="chip" data-filter="dnp" aria-pressed="false">Da non perdere</button>
+    <button class="chip" data-filter="sct" aria-pressed="false">Se c'è tempo</button>
+    <button class="chip" data-filter="todo" aria-pressed="false">Ancora da visitare</button>
+  </div>
+  <div class="progress">Visitate <b id="pv">0</b>/<span id="pt">0</span></div>
+</div>
+
+<section class="route">
+  <div class="eyebrow">Giro per padiglione</div>
+  <h2>Le tappe "da non perdere", padiglione per padiglione</h2>
+  <p class="intro" style="color:var(--ink-2);margin-top:8px">Generato dalla lista qui sotto. Si aggiorna con le spunte.</p>
+  <div class="halls" id="halls"></div>
+</section>
+
+<main id="main"></main>
+
+<footer>
+  <p>Criteri: schede espositori Lineapelle, siti aziendali, stampa di settore (LaConceria, Leather &amp; Luxury), LWG, rivenditori che pubblicano prezzi (Ilcea webshop, RM Leather, A&amp;A Crack, Leatherbox, BuyLeatherOnline). Nessuna conceria italiana pubblica listini: le fasce prezzo sono dedotte dal posizionamento e vanno confermate allo stand. La spunta "visitata" resta salvata solo su questo dispositivo.</p>
+</footer>
+</div>
+
+<script>
+const DATA = [
+{cat:"Vitello per calzatura uomo classica (Italia)",
+ intro:"Il cuore della visita. Vitelli e mezzi vitelli in anilina, box calf e crust per la patina a mano. Qui la guida originale mandava dalle concerie delle maison: Ilcea vende sul suo webshop a 70–180 € a pelle, Superior è la conceria lusso del gruppo Rino Mastrotto, Bonaudo è di Chanel, Everest è al 55 % LVMH. Ottime, ma non a prezzo LORDH. Le concerie sotto fanno la stessa pelle per il calzaturificio medio-alto, e trattano.",
+ items:[
+ {v:"dnp",n:"Zonta Conceria",s:"9P C17-C19, D18-D20",c:"Bassano del Grappa (VI)",w:"concerizonta.com",d:"Vitello da scarpa uomo classica: Museum, Goldanil, Old England e Nevada crust da patinare. La montano Carmina e diversi bespoke, ma non è una maison: dal 2019 famiglia Fietta, LWG Silver.",y:"Chiedi le linee base (Goldanil, Old England), la seconda selezione e il Nevada per la patina. A 60 km dal laboratorio: campionature in giornata."},
+ {v:"dnp",n:"Conceria Bertini Franco 1972",s:"9P H17-H19",c:"Santa Croce sull'Arno (PI)",w:"conceriabertini.it",d:"Specialista puro del mezzo vitello morbido, cromo riconciato al vegetale (articolo Tirreno). Tre selezioni di qualità, stand piccolo, famiglia.",y:"La seconda selezione è il tuo prezzo: stessa pelle, difetti fuori dal taglio. Vendono a mezze pelli per natura."},
+ {v:"dnp",n:"Nuova Antilope",s:"9P G17-G19, H18-H20",c:"Ponte a Egola (PI)",w:"concerianuovaantilope.it",d:"Familiare dal 1958, ciclo completo dal grezzo: box calf, liscio classico, anilina, abrasivato, vernice soft. Gamma esatta per la stringata.",y:"Nessun cliente griffe citato, nessun prezzo griffe. Promossa da \"se c'è tempo\" a prima fascia."},
+ {v:"dnp",n:"Conceria Junior",s:"11P C18-C20",c:"Arzignano (VI)",w:"conceriajunior.it",d:"Solo vitello e vitellino, cromo e metal-free, da 60 anni. Fa anche selleria alta: pelle piena e robusta che regge la patina.",y:"Vicentina a 45 minuti: la conceria di casa per il vitello. Non era nella guida originale."},
+ {v:"dnp",n:"Brotini Mario & C.",s:"9P S27-S29, T28-T30",c:"Castelfranco di Sotto (PI)",w:"conceriabrotini.it",d:"Snc familiare, produzione quasi artigianale: vitelli e mezzi vitelli anilina, un terzo degli articoli tamponati a mano.",y:"Anilina tamponata a mano = la base ideale per la tua patina, a prezzo di piccola conceria. Promossa."},
+ {v:"dnp",n:"Polaris & Co.",s:"11P N2-N4",c:"Fucecchio (FI)",w:"info@conceriapolaris.it",d:"Vitelli e mezzi vitelli, reparto colori chiari. Unica conceria del distretto che scrive di servire \"dai piccoli artigiani ai grandi brand\".",y:"Se lo dichiarano, il MOQ non è un problema. Non era nella guida originale."},
+ {v:"dnp",n:"Nuova Impala",s:"9P M19-M21, N20-N22",c:"Santa Croce sull'Arno (PI)",w:"nuovaimpala.com",d:"Vitelli di peso medio, reparto cromo interno, famiglia dal 1958. Si posiziona esplicitamente \"qualità media/alta\".",y:"È il sweet spot che cerchi, dichiarato nero su bianco."},
+ {v:"dnp",n:"Settebello",s:"9P H21-H29, K22-K30",c:"Santa Croce sull'Arno (PI)",w:"settebelloconceria.it",d:"Mezzi vitelli pieno fiore e nubuck di vitello, autodefinita \"media/alta\", certificata ISO ed EMAS.",y:"Pelle onesta e tracciata senza prezzi griffe. Stand grande: chiedi subito il MOQ."},
+ {v:"dnp",n:"Conceria La Fortezza",s:"9P C16-C18",c:"Santa Croce sull'Arno (PI)",w:"concerialafortezza.it",d:"Box calf e vitello classico, fiore naturale preservato, LWG Gold. Conceria piccola, oltre 20 anni, nessun cliente griffe trovato.",y:"Se il box calf sta sotto i 6 €/piede è la tua alternativa a Ilcea. Accanto a Zonta."},
+ {v:"dnp",n:"Conceria Ferrari",s:"11P B18-B20",c:"Chiampo (VI)",w:"conceriaferrari.com",d:"Dal 1946, vitello e bovino per tomaia e fodera, metal-free, LWG Silver. Focalizzata sulla calzatura.",y:"Un solo fornitore vicentino per tomaia e fodera: meno spedizioni, più forza di trattativa."},
+ {v:"dnp",n:"Conceria La Veneta",s:"11P V1-V3, Z2-Z4",c:"Arzignano (VI)",w:"concerialaveneta.com",d:"Vitello e vitellino a ciclo completo: anilina, spazzolato, verniciato per la scarpa da sera.",y:"Fatturato 2023 in calo del 19 % con perdita: sono in vena di trattare. Verifica la solidità prima di programmare serie lunghe."},
+ {v:"sct",n:"Ilcea · Multipel (Gruppo Vecchia Toscana)",s:"11P P1-P7, R2-R8",c:"Fucecchio (FI)",w:"ilceaconceria.it · gvtfast.com",d:"Ilcea è il vitello di John Lobb e delle maison: webshop a 70–180 € a pelle, cioè 6–9 €/piede. Nello stesso stand Multipel (fascia medio-alta) e il pronto magazzino online GVT Fast.",y:"Passa per il grado B del webshop su un modello hero e per chiedere di GVT Fast. Non aspettarti sconti da chi vende alle maison."},
+ {v:"sct",n:"Incas Conceria (+ Il Veliero, Italtan)",s:"9P A11-A29, B12-B30",c:"Castelfranco di Sotto (PI)",w:"iniziativeconciarieassociate.it",d:"Vitello al vegetale e semicromo 100 % italiano certificato: ottima base per la patina. Stand enorme, linguaggio luxury, export in 30 paesi.",y:"Prodotto giusto, struttura da grandi volumi: chiedi MOQ e seconda scelta, poi decidi."},
+ {v:"sct",n:"Rinaldi Conceria",s:"11P F23-F29, G24-G30",c:"Fucecchio (FI)",w:"rinaldiconceria.com",d:"Cromo dal 1959, \"pelli naturali effetto vintage per la calzatura classica rinnovata\".",y:"L'effetto naturale è un crust già pronto per la patina."},
+ {v:"sct",n:"Nuova Etruria",s:"11P H23-H25, K24-K26",c:"Santa Croce sull'Arno (PI)",w:"nuovaetruria.it",d:"Mezzi vitelli vegetale e cromo, vitello classico tamponato a mano.",y:"Poche evidenze online: cinque minuti allo stand per capire il prezzo."},
+ {v:"sct",n:"Stefanelli Mario & Figli",s:"9P M23-M25",c:"Santa Croce sull'Arno (PI)",w:"conceriastefanelli.it",d:"Mezzi vitelli al vegetale e concia bianca, metal-free, tutto in casa dal 1962.",y:"Il mezzo vitello vegetale è il crust più neutro per tingere a mano."},
+ {v:"sct",n:"Camaleonte",s:"11P P13-P15, R14-R16",c:"Santa Croce sull'Arno (PI)",w:"camaleonteconceria.it",d:"Vitello europeo pieno fiore, metal-free e concia bianca. Ottima pelle, ma orientata a borse, arredo e casual.",y:"Declassata: non dichiara l'uomo classico. Vale solo per il crust bianco."},
+ {v:"sct",n:"Valori · Onda Verde · Co.Ri.Pel · Curtiba",s:"9P F5-F7 · 9P T27-T29 · 11P N6-N8 · 9P U25-U29",c:"Ponte a Egola / Fucecchio / Santa Croce (PI)",w:"",d:"Quattro generaliste del mezzo vitello al cromo, anilina e semianilina. Co.Ri.Pel dichiara uomo classico ma non ha evidenze online.",y:"Riserve per confrontare prezzi: pelle onesta, nessun segnale lusso."},
+ {v:"sct",n:"Nuova Overlord",s:"9P S19-S23, T20-T24",c:"Santa Croce sull'Arno (PI)",w:"concerianuovaoverlord.com",d:"Bovino anilina liscio e stampato dal 1972, uomo classico e cinture. Si presenta ai \"brand di alta moda\".",y:"Buona per una linea bovino più economica del vitello; sonda il prezzo."},
+ {v:"sct",n:"Stock service: Dimar · Fonpelli Fast · Faeda Flash · Mastrotto Express · Fisap",s:"11P B13, C14 · 11P N19-N21 · 11P L1-L13 · 9P R19-R29 · 13P B17-B19",c:"Montorso / Arzignano (VI) · Civitanova (MC)",w:"dimar.com · fonpelli.it · faeda.com · mastrotto.com · fisap.com",d:"Bovino e vitello pronti a magazzino senza minimo: Dimar (\"quantità minime basse\"), Fonpelli Fast (7 articoli, centinaia di colori, 48 ore, nessun minimo), Faeda Flash (48 ore), Mastrotto Express (1.300 colori a stock, anche per piccoli), Fisap (grossista con 70 colori di camoscio vitello).",y:"Per ricarichi e piccole serie: bovino di distretto a prezzo da stock. Non sostituiscono il vitello da patina, lo integrano."},
+ ],
+ drop:[
+ {n:"Superior",y:"conceria lusso del gruppo Rino Mastrotto, 120 addetti, orientata pelletteria per maison."},
+ {n:"Bonaudo",y:"gruppo Chanel dal 2019: prezzi e priorità da maison."},
+ {n:"Everest, Lloyd, Papete (Nuti Ivo)",y:"gruppo da 140 M€ controllato al 55 % da LVMH Métiers d'Art."},
+ {n:"Masoni, Marbella, Hashtag, CILP, Vesta",y:"fornitori Berluti/LV/Dior, pelletteria lusso o controllo di fondi: non parlano a un laboratorio."},
+ {n:"Montebello, Gruppo Peretti (Miura, Gasby)",y:"vicentine ma moda e griffe; solo la divisione Cristina di Peretti sarebbe medio-alta."},
+ {n:"Il Cigno, Carasco, Samanta, Meridiana, Liberty, Ta.Go",y:"vernice, sneaker, stampati e laminati: fuori target uomo classico."},
+ ]},
+
+{cat:"Scamosciati",
+ intro:"Per il derby e la chukka in camoscio: il vitello scamosciato vero (non crosta) costa il doppio della crosta ma regge dieci anni. Le vicentine tengono i colori a stock.",
+ items:[
+ {v:"dnp",n:"Nuova Leon",s:"9P G6-G8",c:"Chiampo (VI)",w:"nuovaleon.com",d:"Croste di vitello selezionate 10–12 piedi², 1,2–1,3 mm (articolo Velour), per calzatura medio-alta dal 1978. Oltre 90 colori a stock.",y:"Spessore giusto da tomaia, colori pronti, a 60 km. Non era nella guida originale."},
+ {v:"dnp",n:"Tre Effe",s:"9P B5-B7, C6-C8",c:"Santa Croce sull'Arno (PI)",w:"treeffegroup.it",d:"Vero vitello scamosciato velour dagli anni '70, linea Basic continuativa e divisione Leather Trading.",y:"Il meglio per un derby scamosciato uomo senza il prezzo di Sciarada. Chiedi la Basic e lo stock del trading."},
+ {v:"dnp",n:"Charles F. Stead",s:"13P A3-A5, B4-B6",c:"Leeds, Regno Unito",w:"cfstead.com",d:"Repello, Superbuck, Janus, kudu: il riferimento mondiale dello scamosciato. Lo usano da Clarks a Edward Green, cioè è industriale con prezzo onesto, non griffe.",y:"Verifica il minimo allo stand; per piccoli lotti in Italia passa da Brizzi Agenzie (13P C12)."},
+ {v:"dnp",n:"Fa.Pel",s:"11P E9",c:"Chiampo (VI)",w:"fapel.com",d:"Croste bovine e di vitello scamosciate 0,7–1,4 mm dal 1986; sottocroste per fodera e sottopiede.",y:"L'opzione economica vicentina: scamosciato base e fodere a prezzo di crosta, stand singolo."},
+ {v:"dnp",n:"Conceria Opera · A22 · Atlantica Leather",s:"11P M11-M21, N12-N22",c:"Santa Croce (PI) · Chiampo (VI)",w:"conceriaopera.it · a22conceria.com · atlanticaleather.com",d:"Tre nello stesso stand: Opera (crosta scamosciata e rovescio, venduta anche a dettaglio da Buckleguy), A22 (scamosciati colorati \"sempre pronti a consegna\"), Atlantica (vitello vegetale intero Groson, chrome-free).",y:"Chi vende a un rivenditore per artigiani vende anche a te. Atlantica per il crust vegetale da patina."},
+ {v:"sct",n:"Sciarada",s:"11P F1-F7, G2-G8",c:"Castelfranco di Sotto (PI)",w:"sciarada.it",d:"Leader mondiale del suede, 1,2 milioni di piedi al mese, linea Lux in vitello rovesciato pieno fiore.",y:"Qualità top ma clienti alta moda e volumi: chiedi la linea Classics e se hanno stock per piccoli."},
+ {v:"sct",n:"Quadrifoglio · Comet Pelli · Ambassador · Caravaggio",s:"9P S9-S11 · 13P B25-B27 · 11P P17-P21 · 11P C13-C15",c:"Chiampo / Cornedo (VI) · Santa Croce / Castelfranco (PI)",w:"",d:"Croste scamosciate bovine e di vitello di fascia media. Quadrifoglio è LWG Silver e vicentina.",y:"Riserve per il confronto prezzo della crosta."},
+ ],
+ drop:[
+ {n:"Astico Scamosceria",y:"croste tecniche per sport, sicurezza e arredo: non è il tuo camoscio."},
+ {n:"Hashtag, Rivadavia",y:"fodere metal-free in orbita LVMH e moda donna."},
+ ]},
+
+{cat:"Concerie estere, cordovan e pelli speciali",
+ intro:"La guida originale mandava da Annonay, Du Puy, Weinheimer, Haas, Horween: 9–14 €/piede all'ingrosso, cordovan sopra i 100 $/piede (250–350 € di materiale a paio). Sono i fornitori di Hermès e John Lobb e trattano i piccoli attraverso i rivenditori. Il valore in fiera sta nei cluster spagnoli e portoghesi, in un tedesco con magazzino in Italia e nel cordovan toscano.",
+ items:[
+ {v:"dnp",n:"Hosbo (Hijos de Oscar Botella Sempere)",s:"13P B8-B10",c:"Elche, Spagna",w:"hosbo.es",d:"Bovino, capra e incrociato finiti anilina, lucidi e brush-off per uomo classico, più fodere. Unica conceria del salone che scrive \"No MOQ\" in scheda.",y:"Prezzi del cluster di Elche, nessun minimo, brush-off pronto per la patina. Prima tappa del padiglione 13."},
+ {v:"dnp",n:"Palomares Piel",s:"13P B15",c:"Elda, Spagna",w:"hpalomares.com",d:"Produttore e distributore da 65 anni: box calf, nappa, nubuck, ingrassati, vernice, fodere. Stock permanente di oltre 50 referenze, LWG.",y:"Si compra a poche pelli da magazzino a prezzo spagnolo."},
+ {v:"dnp",n:"A. Castro & Filhos",s:"13P D3, E4",c:"São João da Madeira, Portogallo",w:"acastrofilhos.pt",d:"Conceria familiare: mezzi vitelli al vegetale, chrome-free, wet-white e cromo, collezioni proprie due volte l'anno, LWG.",y:"Il vegetale e il wet-white in crust sono la base più neutra per la tinta a mano, a prezzo portoghese."},
+ {v:"dnp",n:"Jacobs GmbH",s:"13P C23-C25, D24-D26",c:"Eppertshausen, Germania",w:"jacobsgmbh.de",d:"Vitello e bovino classico per scarpe e cinture, prodotto in Italia con gestione tedesca. Stock program da 200 colori e magazzino di 500 m² in Italia, LWG.",y:"Risolve piccole quantità e tempi. Prezzo da verificare: probabile 6–7 €/piede, al limite del tetto."},
+ {v:"dnp",n:"Simaca Group · Eduardo & Gaspar",s:"13P C10",c:"Arrifana, Portogallo",w:"simaca.pt",d:"Leather house e conceria, 40 anni: nubuck, anilina, pull-up, crazy horse. Servizio Style&Go con oltre 100 referenze in pronta consegna.",y:"Per lanci rapidi e lotti piccoli. Profilo più casual: guarda gli articoli lisci."},
+ {v:"sct",n:"Maryam",s:"11P P29, R28-R30",c:"Santa Croce sull'Arno (PI)",w:"conceriamaryam.it",d:"Cavallo e shell cordovan al vegetale con tecnica della vacchetta toscana, canguro, cervo, vitello. Venduta anche a pelle singola da BuyLeatherOnline.",y:"L'unico cordovan che ha senso a questo prezzo: per un mocassino in serie limitata, non per il core."},
+ {v:"sct",n:"Tusting & Burnett",s:"13P C12",c:"Bedford, Regno Unito",w:"tustingandburnett.com",d:"Piccola conceria familiare dal 1938: cow calf burnishable, tight break, capra africana al vegetale. Ha shop online, quindi nessun minimo.",y:"Prezzo al limite (6–8 £/piede) ma patinabile e con storia inglese spendibile. Stesso stand di Brizzi."},
+ {v:"sct",n:"Perlinger Lederfabrik",s:"9P H4",c:"Furth im Wald, Germania",w:"perlinger-leder.de",d:"Box calf classico dal 1864, lavorazione manuale, meno noto e meno caro di Weinheimer. Stand condiviso con Kilger.",y:"Se sta sotto i 7 €/piede è il box calf \"vero\" più accessibile del salone. Chiedi e basta."},
+ {v:"sct",n:"Nona Source",s:"13P A24",c:"Parigi, Francia",w:"nona-source.com",d:"Deadstock delle maison LVMH: vitello e toro di Roux, Annonay e simili a circa il 70 % del prezzo all'ingrosso, lotti da 1 a 5 pelli, nessun minimo.",y:"Per capsule ed edizioni limitate; niente continuità di articolo o colore."},
+ {v:"sct",n:"Combalia · Curtits Aqualata · Despell",s:"11P A9-A11 · 11P F15 · 11P B22",c:"Igualada, Spagna",w:"combalia.es · curtits-aqualata.com",d:"Il distretto vegetale spagnolo che serve Carmina, Meermin e Yanko: spalle, gropponi e mezzi vitelli 100 % vegetale (Combalia), anilina e metal-free (Aqualata, 10 addetti), vegetale medio-alto (Despell).",y:"Per crust da patina e per le cinture a prezzo spagnolo. Piccole, quindi trattabili."},
+ {v:"sct",n:"Turgut Kardeşler · Karaca Deri",s:"13P E11-E13, F12-F14 · 13P C22-C24",c:"Istanbul, Turchia",w:"turgutkardesler.com.tr · karacaleather.com",d:"Le due turche più strutturate: Turgut (130 addetti, LWG Gold, box calf con chimica italo-tedesca), Karaca (anilina, nubuck, chrome-free).",y:"Il prezzo più basso del salone per un vitello anilina onesto, 3–4 €/piede. Campione alla mano prima di ordinare."},
+ {v:"sct",n:"Dias Ruivo · Pionier Peles · Fonte Velha (J. F. Inácio)",s:"13P A11 · 13P D13, E14 · 11P N28-N30",c:"Portogallo",w:"diasruivo.com · fontevelha.com",d:"Portoghesi con vitello cromo e vegetale (Dias Ruivo, dal 1936, LWG), box calf bovino (Pionier), 100 % vegetale con e-commerce (Fonte Velha).",y:"Riserve portoghesi. Fonte Velha conta di più per suola, guardolo e cinture."},
+ {v:"sct",n:"Agenzie: Brizzi · Europelli Trading / Sirpelli · Maison Fichet",s:"13P C12 · 13P E1-E3 · 13P M9, N10",c:"Milano · San Vittore Olona (MI) · Lione",w:"brizziagenzie.com · fichet.fr",d:"Brizzi rappresenta scamosciati inglesi, cordovan e box calf esteri (quasi certamente Stead e Horween); Europelli/Sirpelli commerciano cervo, canguro e cordovan; Fichet è il grossista lionese con 3.500 colori che serve i piccoli artigiani.",y:"La porta per comprare pelli estere a piccoli lotti, con il ricarico dell'agente."},
+ ],
+ drop:[
+ {n:"Tannerie d'Annonay, Les Tanneries du Puy, HCP",y:"9–12 €/piede all'ingrosso, deposito 50 % e quote su quantità: logica da maison."},
+ {n:"Weinheimer Leder",y:"box calf a 11–14 €/piede al dettaglio: il doppio del tetto."},
+ {n:"Haas Tanneries",y:"Novonappa a 17 $/piede dai rivenditori; solo Utah o Novocalf per uno stivale top, e non è il tuo caso."},
+ {n:"Horween, Shinki Hikaku",y:"shell cordovan oltre 100 $/piede, cioè 250–350 € di materiale a paio."},
+ {n:"Tanneries Roux, Riba Guixa, Verdeveleno, Heng Long",y:"tutte LVMH Métiers d'Art, stesso stand 11P T1-T15."},
+ {n:"Alran, Carriat",y:"capra per Hermès; calzatura al 4 % del fatturato."},
+ {n:"Picusa / Padronesa",y:"fiore corretto: incompatibile con la patina a mano."},
+ {n:"Caravel, France Croco, Nova Kaeru",y:"rettile ed esotici: fuori budget e fuori identità."},
+ {n:"Pakistan, India, Cina, Sud America",y:"fascia bassa o logistica da container; Shafi al massimo per capra da fodera."},
+ ]},
+
+{cat:"Cuoio da suola e vegetale per cinture",
+ intro:"Suola, tacco, guardolo e sottopiede in cuoio al vegetale; spalle e gropponi per le cinture. Rendenbach (oggi JR by Kilger) è il cuoio più caro del mondo, in fossa 9–12 mesi: da bespoke. Badalassi e Walpier si pagano per il nome tra i leathercrafter. A Ponte a Egola ci sono venti cuoifici che fanno concia lenta in vasca a prezzo di distretto: il gioco è farli competere tra loro sul prezzo al kg.",
+ items:[
+ {v:"dnp",n:"Cuoificio Otello",s:"11P D2-D4",c:"Ponte a Egola (PI)",w:"otello.it",d:"Concia lenta in vasca circa 50 giorni, pelli solo da macelli europei, gropponi 3–6 mm, croste per suola e tacco, spalle vegetali. Sette addetti, membro Cuoio di Toscana.",y:"Il cuoificio di paese per il calzaturificio medio: piccolo, quindi flessibile sulle quantità."},
+ {v:"dnp",n:"Macchi & Salvadori",s:"11P A3",c:"Santa Croce sull'Arno (PI)",w:"macchi-salvadori.it",d:"Snc familiare dal 1962: gropponi da suola, fasciatacchi e cuoio da guardolo in tutti gli spessori da pelli francesi, svizzere e nordeuropee, concia lenta in vasca.",y:"Suola, guardolo e fascia tacco da un solo fornitore piccolo. Non era nella guida originale."},
+ {v:"dnp",n:"Cuoificio La Querce",s:"11P B15, C16",c:"Ponte a Egola (PI)",w:"laquerce.it",d:"Dal 1890: l'unico con \"cuoio per costruzione Goodyear\" e \"Reverse\" a catalogo, fasce tacco e guardolo, finiture cerato, pomiciato, naturale 2,5–6,5 mm.",y:"Il migliore interlocutore tecnico sul Goodyear. Confermato."},
+ {v:"dnp",n:"Gi.Elle.Emme Conceria",s:"11P R19-R21, S22",c:"Ponte a Egola (PI)",w:"gielleemme.it",d:"Cuoio ecologico certificato UNI 11427, reparto interno di taglio suole.",y:"Comprare suole già tranciate riduce scarto e manodopera: chiedi il prezzo a paio."},
+ {v:"dnp",n:"Dupelco · Pio Dusini \"Elefante\"",s:"11P M28",c:"Cles (TN)",w:"piodusini.it",d:"Conceria dal 1830, marchio storico Elefante noto tra i calzolai, 6–9 addetti, LWG. A catalogo: \"cuoio per artigiano\", suole tranciate uomo e donna, fascioni per guardolo.",y:"L'unico cuoificio che dichiara di servire l'artigiano, a due ore da Padova. Confronta la concia con quella toscana."},
+ {v:"dnp",n:"Bonistalli & Stefanelli",s:"9P M27-M29",c:"Santa Croce sull'Arno (PI)",w:"bonistallistefanelli.it",d:"Dal 1953, concia lenta in vasca, membro Cuoio di Toscana. Gropponi 3–6 mm per suola, fascia tacco, guardolo e cinture, tinti in botte.",y:"Un groppone che serve sia la suola sia la cintura spessa tipo inglese."},
+ {v:"dnp",n:"La Bretagna",s:"11P C17-C21",c:"Ponte a Egola (PI)",w:"labretagna.com",d:"Spalle, gropponi e mezzi vitelli vegetali da 1,1 a 3,2 mm per cinture e calzatura. Presente sui marketplace per artigiani.",y:"Abituata ai piccoli lotti, meno di moda di Badalassi e Walpier, prezzo più basso. Promossa."},
+ {v:"dnp",n:"La Perla Azzurra",s:"11P E1-E7",c:"Santa Croce sull'Arno (PI)",w:"laperlaazzurra.com",d:"Spalle, fianchi e mezzi dorsi 100 % vegetale per cinture, selleria e ortopedia.",y:"Reputazione di vegetale toscano accessibile tra i cinturai artigiani."},
+ {v:"dnp",n:"Il Ponte Conceria · Montana",s:"11P H21, K22 · 9P K5-K7, L6-L8",c:"Fucecchio (FI) · Ponte a Egola (PI)",w:"conceriailponte.it · montana.it",d:"Il Ponte: fianchi, spalle e gropponi vegetali per scarpe e cinture, profilo da conceria di servizio. Montana: specialista cinture con vegetale tinto passante da 1 a 3,8 mm.",y:"Tinta passante = bordo cintura già colorato, meno lavoro in laboratorio."},
+ {v:"dnp",n:"La Scarpa Conceria",s:"9P K3, L4",c:"Ponte a Egola (PI)",w:"concerialascarpa.it",d:"Dal grezzo produce cuoio da cintura, da guardolo e da fascia tacco: la materia prima dei guardolifici.",y:"Se vuoi tagliarti il guardolo in casa, il cuoio parte da qui."},
+ {v:"dnp",n:"Fonte Velha (Joaquim Francisco Inácio)",s:"11P N28-N30",c:"Alcanena, Portogallo",w:"fontevelha.com",d:"Dal 1933, 100 % vegetale da materie prime europee: guardoli, solette, cinture, suola, selleria. Ha e-commerce.",y:"La conceria vegetale del distretto portoghese Goodyear: prezzi sotto la Toscana per guardolo e spalle da sottopiede."},
+ {v:"sct",n:"Volpi Concerie · Bisonte Cuoificio · CMC",s:"9P G25-G29, H26-H30 · 9P H9-H13 · 11P K11-K13",c:"Ponte a Egola / Santa Croce (PI)",w:"volpiconcerie.it · cuoificiobisonte.it · cmcspa.com",d:"I grandi del distretto: Volpi (il più grande, anche spalle per cinture), Bisonte (castagno, brand lusso e design), CMC (esportatore industriale).",y:"Passa solo per confrontare il prezzo al kg e chiedere l'agente per il Veneto: in fiera parlano a pallet."},
+ {v:"sct",n:"Marca Toro · Virgilio Conceria Artigiana",s:"9P E9, F10 · 11P F24-F26",c:"Ponte a Egola (PI)",w:"marcatoro.it",d:"Marca Toro: cuoio da suola da macello francese 3–6 mm, poco noto. Virgilio: spalle 0,9–3 mm e croste vegetali per suola, intersuola e tacco.",y:"Meno famosi = da sondare sul prezzo. Le croste vegetali abbattono il costo degli strati del tacco."},
+ {v:"sct",n:"Tempesti · Ausonia · Puccini Attilio · Monteverdi",s:"9P R5-R7 · 11P F19-F21 · 9P M10-M14 · 9P N30",c:"Ponte a Egola / Santa Croce (PI)",w:"tempesti.com · ausonia.it",d:"Tempesti (Elbamatt, premium ma sotto Badalassi), Ausonia (vegetale e misto 1–4 mm, economica), Puccini (vende anche a privati), Monteverdi (cinturini orologio, abituata ai lotti piccoli).",y:"Tempesti per una cintura di gamma; le altre per il prezzo."},
+ {v:"sct",n:"Kilger Lederfabrik (linee standard)",s:"9P H4",c:"Viechtach, Germania",w:"kilger.de",d:"La più grande conceria tedesca in fossa dal 1856, proprietaria di JR dal 2021. Oltre al JR fa cuoio in fossa \"normale\".",y:"Solo se avanza tempo: chiedi il prezzo delle linee non JR, mai del JR."},
+ {v:"sct",n:"Combalia · Miret y Cia · Splenda",s:"11P A9-A11 · 11P M29 · 11P A15",c:"Igualada, Spagna",w:"combalia.es · miretycia.com",d:"Vegetale spagnolo per cinture e guardolo; Splenda ha anche sole leather, 12 addetti.",y:"Alternativa estera a prezzo più basso per le cinture."},
+ ],
+ drop:[
+ {n:"Johann Rendenbach / JR by Kilger",y:"fossa di quercia 9–12 mesi, prezzo doppio del toscano: da bespoke, non da una scarpa a 200 €."},
+ {n:"Badalassi Carlo, Walpier",y:"Pueblo, Minerva, Buttero: cult dei leathercrafter, si paga il nome."},
+ {n:"Conceria 800, Lamonti",y:"fossa e castagno dell'Amiata con storytelling: sopra la media del distretto."},
+ {n:"Mangusta",y:"cinture al cromo: non coerente con la tua cintura vegetale."},
+ {n:"Tochigi Leather",y:"vegetale giapponese in fossa: lusso a 10.000 km."},
+ ]},
+
+{cat:"Suole, guardoli, fondi, forme e tendiscarpe",
+ intro:"La parte del fondo che oggi compri sulla Riviera. Qui la guida originale era già quasi giusta: i guardolifici veneti sono i migliori d'Italia e stanno a mezz'ora. Tolti i formifici e i tacchifici da griffe, aggiunti i marchigiani che vendono a paio.",
+ items:[
+ {v:"dnp",n:"Tre Bi",s:"24P B29",c:"Cornuda (TV)",w:"tre-bi.it",d:"Guardolificio da oltre 30 anni: guardoli lisci, cuciti, cordonati, scanalati, imbottiti per Goodyear, norvegese e tirolese, in cuoio, rigenerato, tunit ed EVA. Sul sito ha le sezioni \"forniture per calzolai\".",y:"Il fornitore di guardolo per LORDH: vende ai piccoli, a un'ora da Saonara. Confermato."},
+ {v:"dnp",n:"Leta",s:"22P D5, E6",c:"Noventa Padovana (PD)",w:"leta.it",d:"Dal 1983: guardoli, bordi suola, profili, mignon, intrecci e lacci in pelle.",y:"A dieci minuti dal laboratorio: anche solo per campionature rapide. Confermato."},
+ {v:"dnp",n:"Casali 2.0",s:"22P E28",c:"Castelfidardo (AN)",w:"casalitaly.com",d:"Tacchi, sottotacchi mono e doppio strato, mezze suole e fondi in compound TPU per la calzatura elegante e la riparazione di lusso. Oltre 100 distributori in 30 paesi, venduti a paio.",y:"Lo standard italiano del sottotacco in gomma per la stringata. Promosso a prima fascia."},
+ {v:"dnp",n:"Suolificio De Carolis",s:"22P E4",c:"Porto Sant'Elpidio (FM)",w:"suolificiodecarolis.com",d:"Suole e fondi in cuoio e gomma per calzatura di qualità, uomo classico, nel distretto fermano.",y:"Chiedi fondi Blake e Goodyear già pronti a paio: il costo del cuoio senza lo scarto del taglio."},
+ {v:"dnp",n:"The Harboro Rubber Co. (Dainite)",s:"24P C13",c:"Market Harborough, Regno Unito",w:"dainite.com",d:"La suola in gomma a borchie dal 1910, montata da Crockett & Jones, Tricker's, Church's e anche da Meermin a 200 € retail.",y:"Sostenibile al tuo prezzo con valore percepito alto. Chiedi MOQ e il distributore italiano."},
+ {v:"dnp",n:"Formificio Ifaba",s:"22P C21-C25, D22-D26",c:"Parabiago (MI) · Fossò (VE)",w:"ifaba.it",d:"Forme in legno e plastica dal 1955; ha aperto un nuovo formificio a Fossò, sulla Riviera del Brenta, e produce tendiscarpe in legno.",y:"Forma, serie e tendiscarpe brandizzati da un solo fornitore a 15 km. Confermato."},
+ {v:"dnp",n:"Solettificio Coba · Pems Cambrillones",s:"24P L27-L29 · 22P L28",c:"Sant'Elpidio a Mare (FM) · Elda, Spagna",w:"solettificiocoba.com · cambrillonespems.com",d:"Coba: solette di montaggio uomo e fussbett. Pems: specialista di cambrioni in acciaio, tubi tacco e rivetti.",y:"Componenti a basso costo dove serve un fornitore dedicato, a prezzo di distretto."},
+ {v:"sct",n:"Solpré",s:"22P P5",c:"Felgueiras, Portogallo",w:"solpre.pt",d:"Tra i più grandi produttori europei di suole prefabbricate in cuoio, neolite, crepe e micro: 5.000–6.000 paia al giorno, ISO 9001.",y:"Benchmark portoghese sul prezzo delle suole in cuoio finite; industriale, verifica il minimo."},
+ {v:"sct",n:"Komponenty Zlin · Gommus · Davos",s:"24P B3 · 24P F7-F9 · 22P D7-D9",c:"Zlin (CZ) · Montecarotto (AN) · Cavaso del Tomba (TV)",w:"komponentyzlin.cz · gommus.it · davos.it",d:"Gomma vulcanizzata tipo Dainite a prezzo ceco (Zlin, ex distretto Bata), cooperativa marchigiana di suole e tacchi, lastre gomma trevigiane.",y:"Da confrontare con Dainite e Casali sul prezzo."},
+ {v:"sct",n:"Tacchificio Val di Chienti Plast · Da.Mi",s:"24P M25-M29 · 22P H1-H5",c:"Morrovalle / Sant'Elpidio a Mare (FM)",w:"valdichientiplast.it · dami.it",d:"Tacchi in cuoio, plastica e policarbonato (Val di Chienti, storicamente donna); fondi in cuoio e TPU (Da.Mi, nata dal taglio cuoio).",y:"Solo per i tacchi uomo in cuoio o rivestiti."},
+ {v:"sct",n:"Formificio Rodia / Last Italia",s:"22P M2-M4",c:"Carinaro (CE)",w:"formificiorodia.com",d:"Dal 1900, tra i più grandi formifici italiani, forme e tendiscarpe.",y:"Buono, ma la Campania è lontana: Ifaba a Fossò vince sulla logistica."},
+ {v:"sct",n:"Tradigo Giovanni",s:"24P H22",c:"Milano",w:"tradigo.it",d:"Dal 1925: tendiscarpe in faggio naturale con molla, cedro, plastica; sottopiedi di lusso ed economici; sacchetti portascarpe personalizzati.",y:"Declassato: prendi la linea faggio economica e i sacchetti col logo, non il cedro top."},
+ {v:"sct",n:"Ciac · Svig",s:"22P E18-E20 · 24P D8-D10",c:"Pieve Emanuele (MI) · Genova",w:"ciac-srl.com · svig.it",d:"Grossisti per calzolai: forme, tendiscarpe, calzanti, suole, tacchi, utensili (Ciac); tacchi, mezze suole e tendiscarpe in plastica venduti a paio (Svig).",y:"Fornitori tutto-in-uno per piccole quantità; qualità da riparazione, non da prima montatura."},
+ {v:"sct",n:"Bartoli · Pidigi · Miami",s:"24P C8-C10 · 22P H15-H19 · 24P E12-E14",c:"Carraia (LU) · Verona · Morrovalle (MC)",w:"bartolispa.it · pidigi.com · miamisrl.co",d:"Cartoni per sottopiedi (Bartoli, lo standard), puntali e contrafforti termoadesivi (Pidigi, veronese), sottopiedi comfort (Miami).",y:"Si comprano dal grossista; allo stand chiedi il rivenditore locale."},
+ {v:"sct",n:"Castell · Corium",s:"24P E11-E13 · 24P D19",c:"Elche, Spagna · Certaldo (FI)",w:"castell.es · corium-creazioni.it",d:"Trecce e guardoli spagnoli economici (Castell); guardoli e cinture in cuoio fatti a mano (Corium).",y:"Castell come benchmark prezzo; Corium se vuoi cinture finite conto terzi."},
+ ],
+ drop:[
+ {n:"Manfredini",y:"forme e tacchi per Ferragamo, Armani, Versace: buono ma da griffe, e a Napoli."},
+ {n:"Guardolificio Lucchese",y:"posizionamento \"calzatura e pelletteria di lusso\": solo se Tre Bi e Leta non hanno un articolo."},
+ {n:"Vibram",y:"suole outdoor, sport e fashion: non è la gomma da stringata."},
+ {n:"Uteksol, Italtacco, Villa Cortese, Italcompo, LTM",y:"guardoli termoplastici e tacchi donna moda."},
+ {n:"Bolflex, Atlanta, Ortholite e i sottopiedi asiatici",y:"sneaker e calzatura industriale."},
+ ]},
+
+{cat:"Cere, creme, tinte e attrezzi per la patina",
+ intro:"Le tue finiture a mano e i prodotti per la cura da vendere con la scarpa. Iexi e Carrea erano già giusti. La vera aggiunta è Pidigi: il canale veronese per le tinture autofissanti Fenice con outlet fino a -80 %. Sommer, che la guida indicava, fa chimica per concerie in fusti: fuori target.",
+ items:[
+ {v:"dnp",n:"Iexi",s:"22P D11-D13",c:"Firenze",w:"iexi.com",d:"Chimica di finissaggio per calzatura: creme, crema liquida per sfumature, cere carnauba, appretti, detergenti, articoli personalizzati. Il fornitore dei calzaturifici toscani per la patina di linea.",y:"Prezzi industriali molto sotto Saphir, formati da 1 litro. Chiedi tinte per patina e kit da rivendere. Confermato."},
+ {v:"dnp",n:"Pidigi",s:"22P H15-H19, K16-K20",c:"Verona",w:"pidigi.com",d:"Distributore dal 1953 di materiali per calzatura: linea finissaggio con le tinture autofissanti Fenice (creme fluide a base acqua per tingere e patinare il crust), outlet online fino a -80 %, più puntali e contrafforti.",y:"Fenice a prezzo e a piccole quantità a un'ora da Padova. Non era nella guida originale."},
+ {v:"dnp",n:"Alfredo Carrea & Figli",s:"24P L22",c:"Genova",w:"carreaonline.it",d:"Quarta generazione, marchio Prestige: lucidi, creme, tinte, spazzole, tendiscarpe, lacci, calzanti, kit e scatole. Articoli e packaging personalizzabili, shop B2B.",y:"Il candidato per un kit cura a marchio LORDH da vendere a 20–40 €. Tratta il MOQ. Confermato."},
+ {v:"dnp",n:"Victoria Spazzolificio",s:"24P A19",c:"Vittorio Veneto (TV)",w:"victoria-brush.com",d:"Spazzole in crine made in Italy, set completi per la cura, tendiscarpe, creme, impermeabilizzanti, private label.",y:"A un'ora: spazzole col logo senza minimi da importatore. Confermato."},
+ {v:"sct",n:"Barbieri Fratelli (Movi) · Tan Company Italia · F.lli Chiesa",s:"24P D8-D10 · 22P C12-C14 · 22P F25",c:"Genova · Napoli · Roma",w:"movi.to · tancompany.com · fllichiesa.com",d:"Distributori professionali: lucidi e lacci Movi (oltre 10.000 articoli), attrezzi e consumabili da calzolaio (Tan Company: Kai, Olfa, Topy, Loctite), chimica Fenice e forniture (Chiesa, dal 1867).",y:"Per attrezzeria e consumabili a piccole quantità; per le tinte vai dai produttori."},
+ {v:"sct",n:"Tokonole / Seiwa · Kawamura",s:"22P M11",c:"Tokyo, Giappone",w:"seiwa-net.com",d:"Gomma per bordi a base acqua, balsami e colle giapponesi.",y:"Ottimo per la costoletta delle cinture; allo stand si trovano i formati industriali."},
+ {v:"sct",n:"CTC Ars Tinctoria · SSIP",s:"13P Z2 · 13P V9-V11",c:"Santa Croce (PI) · Pozzuoli (NA)",w:"ctcgroupe.com · ssip.it",d:"Laboratori di prova: solidità della patina allo sfregamento e alla luce, analisi REACH.",y:"Un test sulla tenuta della patina risolve i reclami prima che arrivino."},
+ {v:"sct",n:"Adriatica Accessori",s:"22P B25-B29",c:"Chiaravalle (AN)",w:"aa-italy.com",d:"Nastri per stampa a caldo, pennelli, abrasivi, elastici.",y:"Per marchiare a caldo il logo su sottopiede e cinture."},
+ ],
+ drop:[
+ {n:"Sommer, Kemas",y:"chimica per concerie in fusti: non fanno tinte per patina a mano."},
+ {n:"Kenda Farben, Saphir",y:"non espongono: Kenda si compra dai distributori, Saphir non è in fiera."},
+ ]},
+
+{cat:"Lacci, fibbie, cerniere e filati",
+ intro:"Il dettaglio che si vede. Cittadini è un gruppo industriale da bobine: ottimo prezzo, ma per un laboratorio contano di più chi lavora artigianale (Grossi) e chi personalizza a piccole quantità (Serrano). Per fibbie e cerniere, i produttori bresciani e bergamaschi hanno cataloghi standard senza stampi.",
+ items:[
+ {v:"dnp",n:"Grossi",s:"22P K27",c:"Monsummano Terme (PT)",w:"grossisrl.com",d:"Dal 1955: lacci in cotone cerato con filati selezionati, tinti, tessuti e cerati da artigiani; lacci in pelle tondi da 3 mm in pieno fiore; mignon e trecce.",y:"Lo standard italiano onesto per i lacci cerati da stringata. Chiedi 75/80/90 cm, puntali e minimo per colore. Promosso."},
+ {v:"dnp",n:"Stringhificio Serrano",s:"22P P7-P9",c:"Serra de' Conti (AN)",w:"stringhificioserrano.com",d:"Stringhe per calzaturifici e linea professional Lacesone-Linkup per calzolai; stringhe appaiate personalizzate con busta e cartellino col logo.",y:"Lacci di ricambio brandizzati da vendere online, senza stampi. Promosso."},
+ {v:"dnp",n:"Magic Sfea",s:"22P E1-E3",c:"Rudiano (BS)",w:"magicsfea.it",d:"Dal 1972 fibbie e accessori pressofusi in ottone e zama: circa 5.000 articoli a catalogo, stampi interni.",y:"Fibbie monk e cinture 30–35 mm da catalogo, nessuno stampo da pagare. MOQ tipico 50–100 pezzi. Confermato."},
+ {v:"dnp",n:"Fim Italia",s:"22P D1-D3",c:"Castelli Calepio (BG)",w:"fimitalia.com",d:"Dal 1970 fibbie e accessori in zama per cinturifici, classiche uomo e sportive.",y:"Zama a prezzo bergamasco per la cintura da 60–90 €."},
+ {v:"dnp",n:"Sollini Gino",s:"24P N21-N23",c:"Monte Urano (FM)",w:"sollini.com",d:"Distributore ufficiale YKK per calzatura: Excella, metallo, nylon; più fibbie, lacci, elastici, rivetti, etichette.",y:"Cerniere per stivali e chelsea a piccole quantità, senza il MOQ di YKK diretto."},
+ {v:"dnp",n:"Ovac",s:"24P F21-F23",c:"Montegranaro (FM)",w:"ovacspa.com",d:"Dal 1975, oltre 10.000 articoli per calzolai: fibbie, catene, elastici, occhielli, ganci, lacci, lucidi, filati, cerniere, puntali. Magazzino con punto vendita.",y:"Il canale più pratico del distretto fermano per chi compra 50 pezzi alla volta."},
+ {v:"sct",n:"Cittadini",s:"24P C28",c:"Paderno Franciacorta (BS)",w:"cittadini.eu",d:"Oltre 90 anni: trecce per calzatura semi-ingrassate e oliate, lacci in cotone e sintetici, filati ad alta tenacità.",y:"Declassato: prezzo industriale ma MOQ a bobine. Conferma lo stock per piccoli lotti."},
+ {v:"sct",n:"Cordonfil · Nanni 1955 · Arpex",s:"22P K5 · 24P N28-N30 · 24P G21-G23",c:"Brea de Aragón (ES) · Porto Sant'Elpidio (FM) · Barletta (BT)",w:"cordonfil.com · nanni.it · lacci.com",d:"Lacci cerati e filo per cucitura Blake a prezzo spagnolo (Cordonfil); magazzino di 2.500 m² di lacci ed elastici (Nanni); lacci pugliesi just-in-time (Arpex).",y:"Benchmark prezzo e stock per i lacci."},
+ {v:"sct",n:"Limonta & Limonta · Manifattura Rossini",s:"22P E2 · 22P K15-K17",c:"Vimercate / Monza (MB)",w:"limontaelimonta.com · manifatturarossini.com",d:"Elastici rigidi per Chelsea boot (Limonta); trecce tonde e cordoncini in cuoio e cotone (Rossini, dal 1939).",y:"Elastici Chelsea senza distributore; lacci in cuoio per mocassini."},
+ {v:"sct",n:"Lorad · Italmetal · Santoni · V.A.M.P.",s:"24P D29 · 24P D27 · 24P B17-B19 · 22P H25-H27",c:"Brescia / Bergamo / Fermo",w:"",d:"Fibbie in zama e minuterie da produttori bresciani e marchigiani; Lorad e Italmetal sono lo stesso gruppo, stand vicini.",y:"Per confrontare i prezzi con Magic Sfea e Fim."},
+ {v:"sct",n:"Friulizipper · Rubi Zippers",s:"22P E26 · 22P P8",c:"Codroipo (UD) · Rubí, Spagna",w:"friulizipper.it · rubizippers.com",d:"Zip metalliche made in Italy per la fascia medio-alta, cooperativa friulana (Friulizipper); cerniere spagnole dal 1926 (Rubi).",y:"Alternative a YKK e a Lampo (che è lusso) per lo stivale."},
+ {v:"sct",n:"Cieffe Filati",s:"22P H11-H13",c:"Quarrata (PT)",w:"cieffefilati.it",d:"Filati cucirini con oltre 10.000 referenze pronte a magazzino.",y:"Filati tomaia a stock; chiedi il lino cerato per il guardolo."},
+ {v:"sct",n:"Moda T.E.C. · Buckleguy · Idam",s:"24P E28-E30 · 24P F25 · 22P E22-E24",c:"Montegranaro (FM) · Newburyport (USA) · Orvault (FR)",w:"modatec.eu · buckleguy.com · idam.fr",d:"Fibbia con logo prototipata in digitale senza stampi costosi (Moda T.E.C.); ottone massiccio senza minimo ma con spedizione e dazi USA (Buckleguy); trader francese di fibbie premium (Idam).",y:"Solo per campionature o per una fibbia proprietaria."},
+ {v:"sct",n:"Fashion Tex · Ribbontex",s:"24P C3-C5 · 22P D17-D19",c:"Corropoli (TE) · Paviola (PD)",w:"fashiontex.net · ribbontex.it",d:"Etichette tessute e jacquard, cartellini.",y:"Per le etichette interne; Ribbontex è padovana."},
+ ],
+ drop:[
+ {n:"YKK Italia (diretto)",y:"minimi anche di 500 pezzi: compra Excella da Sollini o Ovac."},
+ {n:"Lampo",y:"cerniera top ma prezzi da griffe; solo se accetta piccoli lotti."},
+ {n:"Italbraid, Trencilo",y:"500.000 paia al giorno e fabbrica in Vietnam: fuori scala."},
+ {n:"By Mora, AMS, Lampa",y:"minuteria per brand di alta gamma."},
+ {n:"Minuteria e zip cinesi",y:"MOQ industriali, niente made in Italy."},
+ ]},
+
+{cat:"Fodere, design e certificazioni",
+ intro:"La fodera pesa poco sul prezzo ma tanto sulla percezione. Capra e vitello da fodera a prezzo spagnolo o vicentino; la conceria a 5 km da Saonara per le urgenze.",
+ items:[
+ {v:"dnp",n:"Hosbo",s:"13P B8-B10",c:"Elche, Spagna",w:"hosbo.es",d:"Capra, bovino e suino finiti per tomaia e fodera, nessun minimo dichiarato.",y:"Capra fodera 0,8–1,0 mm beige a prezzo spagnolo, stessa visita della tomaia."},
+ {v:"dnp",n:"Hoorn Van Shoe Linings",s:"13P B12",c:"Waalwijk, Paesi Bassi",w:"shoe-linings.com",d:"Solo fodere: maiale, capra, pecora, bovino, vitello, bufalo; cromo, chrome-free e metal-free; audit LWG.",y:"Lo specialista europeo delle fodere, stand accanto a Hosbo. Confermato."},
+ {v:"dnp",n:"Conceria Tirrena",s:"13P G1-G3, H2-H4",c:"Civitanova Marche (MC)",w:"conceriatirrena.com",d:"Suino, caprino e ovino solo per fodera, anche chrome-free e metal-free. Conceria industriale del distretto marchigiano.",y:"Fodera italiana a prezzo industriale; chiedi mezze pelli e stock. Promossa."},
+ {v:"dnp",n:"Dalla Benetta Luigi · Carpanese",s:"9P N24-N26 · 9P D1-D3, E2-E4",c:"Chiampo (VI)",w:"dallabenetta.com · conceriacarpanese.com",d:"Fodere e tomaie di vitello e bovino, stesso distretto, stand nello stesso padiglione.",y:"La fodera in vitello \"giusta\" per una scarpa da 200 €, a 60 km. Confrontale."},
+ {v:"dnp",n:"Rigato Romano",s:"13P C15-C17, D16-D18",c:"Vigonovo (VE)",w:"rigatoromano.it",d:"Piccola conceria locale: bovino e montone per calzatura e pelletteria, fodera.",y:"A 5 km da Saonara: fodere e ricarichi urgenti senza corriere."},
+ {v:"dnp",n:"Curtidos Lajara",s:"13P C19",c:"Petrer, Spagna",w:"curtidoslajara.com",d:"Trader LWG con deposito permanente e servizio immediato: bovino, vitello e agnello per tomaia e fodera.",y:"Stock service per piccoli; qualità media, campiona."},
+ {v:"sct",n:"Fa.Pel · Fonpelli Fast · Pellami Due C",s:"11P E9 · 11P N19-N21 · 13P C1-C3",c:"Chiampo / Arzignano (VI) · Monte San Pietrangeli (FM)",w:"fapel.com · fonpelli.it · duecspa.com",d:"Sottocroste per fodera e sottopiede a costo minimo (Fa.Pel); bovino pronto in 48 ore senza minimo (Fonpelli); fodere maiale, capra e vitello (Due C, 10 M€).",y:"Per copri-sottopiede, contrafforti e fodere posteriori."},
+ {v:"sct",n:"Averpeaux · Maison Fichet · Raynaud Jeune · Sohre-Leder",s:"11P B26 · 13P M9, N10 · 11P A23 · 13P D20",c:"Mazamet / Lione (FR) · Waldfeucht (DE)",w:"",d:"Capra e vitello da fodera francesi, crosta da fodera lionese, agnello vegetale chrome-free, fodera tedesca certificata IVN.",y:"Alternative estere se vuoi una fodera \"naturale\" da raccontare."},
+ {v:"sct",n:"Ascot · Primorpelli · Amaltea (Ingropelli) · Alberto Rosi",s:"9P T26 · 13P H1-H3 · 11P U17-U21 · 13P F4",c:"Toscana",w:"",d:"Capretti da fodera toscani, suino e montone, nappa agnello per mocassini; Rosi è un agente multi-conceria.",y:"Un agente può aggregare piccoli ordini da più concerie."},
+ {v:"sct",n:"Impuls",s:"15P A22",c:"San Lorenzo in Campo (PU)",w:"impuls.it",d:"Studio di design e prototipi esclusivi di calzatura uomo classica.",y:"Solo se vuoi esternalizzare la modelleria di una nuova forma."},
+ {v:"sct",n:"ICEC · Arsutoria School",s:"13P V1 · 15P B2",c:"Milano",w:"icec.it · arsutoriaschool.com",d:"Certificazione volontaria della filiera pelle; corsi brevi di modelleria e tecnica uomo classico.",y:"ICEC costa audit annuali: prima chiedi il prezzo, poi decidi se serve come claim."},
+ ],
+ drop:[
+ {n:"Guerino, Richard, Mégisseries di Millau e Graulhet",y:"agnelli e capretti per calzature di lusso: fascia griffe per una fodera."},
+ {n:"Haas (come fodera)",y:"vitello top francese: uno spreco sotto il piede."},
+ {n:"Fodere indiane, pakistane, cinesi",y:"prezzi minimi ma container e controllo qualità a distanza."},
+ ]},
+];
+
+const hallOf = s => (s.match(/\d+P/)||[""])[0];
+let store={};
+try{store=JSON.parse(localStorage.getItem("lordh-lp111")||"{}")}catch(e){store={}}
+const save=()=>{try{localStorage.setItem("lordh-lp111",JSON.stringify(store))}catch(e){}};
+const keyOf=(ci,ii)=>ci+":"+ii;
+
+const main=document.getElementById("main");
+DATA.forEach((cat,ci)=>{
+  const sec=document.createElement("section");sec.className="cat";
+  sec.innerHTML=`<div class="eyebrow">${ci+1} / ${DATA.length}</div><h2>${cat.cat}</h2><p class="intro">${cat.intro}</p>`;
+  ["dnp","sct"].forEach(v=>{
+    const items=cat.items.map((it,ii)=>({it,ii})).filter(x=>x.it.v===v);
+    if(!items.length)return;
+    const lab=document.createElement("div");lab.className="group-label "+v;
+    lab.innerHTML=`<i></i>${v==="dnp"?"Da non perdere":"Se c'è tempo"}`;
+    sec.appendChild(lab);
+    const list=document.createElement("div");list.className="list";
+    items.forEach(({it,ii})=>{
+      const k=keyOf(ci,ii);
+      const card=document.createElement("article");card.className="card"+(store[k]?" visited":"");
+      card.dataset.v=it.v;card.dataset.k=k;card.dataset.hall=hallOf(it.s);
+      const site=it.w?` · ${it.w}`:"";
+      card.innerHTML=`<div class="stand"><div class="hall">${hallOf(it.s)||"–"}</div><div class="pos">${it.s.replace(/\d+P /g,"")}</div></div>
+      <div class="body"><div class="head"><h3 class="name">${it.n}</h3><span class="pill ${it.v}">${it.v==="dnp"?"Da non perdere":"Se c'è tempo"}</span></div>
+      <div class="where">${it.c}${site}</div><p class="desc">${it.d}</p><p class="why">${it.y}</p>
+      <label class="check"><input type="checkbox" id="chk-${k.replace(":","-")}" ${store[k]?"checked":""}> Visitata</label></div>`;
+      card.querySelector("input").addEventListener("change",e=>{store[k]=e.target.checked;if(!e.target.checked)delete store[k];save();card.classList.toggle("visited",e.target.checked);refresh();});
+      list.appendChild(card);
+    });
+    sec.appendChild(list);
+  });
+  if(cat.drop&&cat.drop.length){
+    const d=document.createElement("details");d.className="drop";
+    d.innerHTML=`<summary>Perché non ci fermiamo (${cat.drop.length})</summary><ul>${cat.drop.map(x=>`<li><b>${x.n}</b>: ${x.y}</li>`).join("")}</ul>`;
+    sec.appendChild(d);
+  }
+  main.appendChild(sec);
+});
+
+let filter="all";
+const chips=[...document.querySelectorAll(".chip")];
+chips.forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;chips.forEach(c=>c.setAttribute("aria-pressed",c===b));refresh();}));
+
+function refresh(){
+  const cards=[...document.querySelectorAll(".card")];
+  let vis=0;
+  cards.forEach(c=>{
+    const done=store[c.dataset.k];if(done)vis++;
+    let show=true;
+    if(filter==="dnp")show=c.dataset.v==="dnp";
+    else if(filter==="sct")show=c.dataset.v==="sct";
+    else if(filter==="todo")show=!done;
+    c.classList.toggle("hidden",!show);
+  });
+  document.querySelectorAll(".group-label").forEach(l=>{
+    const list=l.nextElementSibling;
+    const any=list&&[...list.children].some(c=>!c.classList.contains("hidden"));
+    l.classList.toggle("hidden",!any);if(list)list.classList.toggle("hidden",!any);
+  });
+  document.getElementById("pv").textContent=vis;
+  document.getElementById("pt").textContent=cards.length;
+  renderHalls();
+}
+
+function renderHalls(){
+  const order=["9P","11P","13P","22P","24P","15P"];
+  const byHall={};
+  DATA.forEach((cat,ci)=>cat.items.forEach((it,ii)=>{
+    if(it.v!=="dnp")return;
+    const h=hallOf(it.s)||"?";
+    const arr=(byHall[h]=byHall[h]||[]);
+    if(arr.some(x=>x.n.split(" (")[0]===it.n.split(" (")[0]))return;
+    arr.push({n:it.n,s:it.s,k:keyOf(ci,ii)});
+  }));
+  const box=document.getElementById("halls");box.innerHTML="";
+  order.filter(h=>byHall[h]).forEach(h=>{
+    const items=byHall[h];const done=items.filter(x=>store[x.k]).length;
+    const el=document.createElement("div");el.className="hallbox";
+    el.innerHTML=`<div><span class="hall">${h}</span><span class="n">${done}/${items.length} fatte</span></div><ul>${items.map(x=>{
+      const pos=(x.s.split("·")[0]||x.s).replace(/\d+P /g,"").split(",")[0].trim();
+      return `<li class="${store[x.k]?"done":""}"><code>${pos}</code><span>${x.n}</span></li>`}).join("")}</ul>`;
+    box.appendChild(el);
+  });
+}
+refresh();
+</script>
