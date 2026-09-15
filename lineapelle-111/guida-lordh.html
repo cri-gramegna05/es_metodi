@@ -92,6 +92,18 @@ details.drop li b{color:var(--ink)}
 .hallbox li:first-child{border-top:0}
 .hallbox li code{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ink-3);white-space:nowrap;min-width:64px}
 .hallbox li.done{color:var(--visited);text-decoration:line-through}
+.stk-group{margin-top:16px}
+.stk-group h3{font-size:.95rem;margin-bottom:6px}
+.stk{display:grid;grid-template-columns:78px 1fr;gap:0;border-top:1px solid var(--line)}
+.stk:last-child{border-bottom:1px solid var(--line)}
+.stk .st{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:600;padding:8px 0;color:var(--ink-2)}
+.stk .st small{display:block;font-weight:500;color:var(--ink-3);font-size:.7rem;overflow-wrap:anywhere}
+.stk .tx{padding:8px 0 8px 8px;font-size:.88rem}
+.stk .tx b{display:block}
+.stk .tx span{color:var(--ink-2)}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.tag.d{background:var(--accent-soft);color:var(--accent)}
+.tag.p{background:var(--grey-soft);color:var(--ink-3)}
 footer{padding-block:24px;font-size:.82rem;color:var(--ink-3);max-width:66ch}
 .hidden{display:none!important}
 @media (max-width:480px){
@@ -132,6 +144,13 @@ footer{padding-block:24px;font-size:.82rem;color:var(--ink-3);max-width:66ch}
   <h2>Le tappe "da non perdere", padiglione per padiglione</h2>
   <p class="intro" style="color:var(--ink-2);margin-top:8px">Generato dalla lista qui sotto. Si aggiorna con le spunte.</p>
   <div class="halls" id="halls"></div>
+</section>
+
+<section class="route" id="stock-sec">
+  <div class="eyebrow">Stock service</div>
+  <h2>Senza minimi, spediscono subito</h2>
+  <p class="intro" style="color:var(--ink-2);margin-top:8px">Aziende che tengono magazzino e vendono a piccole quantità, per ricarichi e piccole serie. "Dichiarato" = scritto nella scheda fiera o sul sito; "probabile" = dedotto dal modello (grossista, agente, e-commerce). Conferma allo stand tempi e minimo per colore.</p>
+  <div id="stock"></div>
 </section>
 
 <main id="main"></main>
@@ -426,4 +445,81 @@ function renderHalls(){
   });
 }
 refresh();
+
+const STOCK=[
+{g:"Pelle per tomaia e fodera: stock dichiarato",items:[
+ {n:"Ego Leather",s:"13P E6-E10",c:"Milano",t:"d",x:"Bovino fiore e croste per calzatura e pelletteria: ampia gamma sul pronto, consegna 24 ore, nessun minimo d'ordine (scheda fiera)."},
+ {n:"Fonpelli Fast",s:"11P N19-N21",c:"Arzignano (VI)",t:"d",x:"7 articoli bovini, centinaia di colori, spedizione in 48 ore, nessun minimo (sito). Fa anche fodere e gropponi."},
+ {n:"Dimar Conceria",s:"11P B13, C14",c:"Montorso Vicentino (VI)",t:"d",x:"Bovino e scamosciato \"pronti a magazzino, quantità minime basse\" (scheda fiera). A 40 minuti."},
+ {n:"Gruppo Mastrotto Express",s:"9P R19-R29",c:"Arzignano (VI)",t:"d",x:"Oltre 1.700 colori di bovino sempre a magazzino, 48 ore, pensato anche per designer e piccole quantità. Solo bovino, non vitello."},
+ {n:"Poletto",s:"9P S13-S17, T14-T18",c:"Arzignano (VI)",t:"d",x:"Stock service con più di 1.000 colori in pronta consegna, bovino per calzatura e pelletteria (scheda fiera)."},
+ {n:"Ava Leather \"NOW Stock&Go\"",s:"13P B29, C28-C30",c:"Arzignano (VI)",t:"d",x:"Pronto magazzino su oltre 250 articoli e colori di bovino (scheda fiera)."},
+ {n:"Futura Leathers",s:"13P B14-B16",c:"Arzignano (VI)",t:"d",x:"Bovino per calzatura uomo classica con stock service e spedizione veloce (scheda fiera)."},
+ {n:"Faeda Flash",s:"11P L1-L13, M2-M14",c:"Montorso Vicentino (VI)",t:"d",x:"Collezioni di vitello e bovino pronte, spedite in 48 ore nel mondo (sito)."},
+ {n:"Hosbo",s:"13P B8-B10",c:"Elche, Spagna",t:"d",x:"\"No MOQ\" in scheda fiera: bovino, capra e suino per tomaia e fodera."},
+ {n:"Palomares Piel",s:"13P B15",c:"Elda, Spagna",t:"d",x:"Stock permanente di oltre 50 referenze: box calf, nubuck, ingrassati, fodere (sito)."},
+ {n:"Curtidos Lajara",s:"13P C19",c:"Petrer, Spagna",t:"d",x:"\"Deposito permanente e servizio immediato\", trader LWG di tomaia e fodera (scheda fiera)."},
+ {n:"Jacobs GmbH",s:"13P C23-C25",c:"Eppertshausen, Germania",t:"d",x:"Stock program da circa 200 colori di vitello e bovino con magazzino di 500 m² in Italia (sito)."},
+ {n:"Simaca \"Style&Go\"",s:"13P C10",c:"Arrifana, Portogallo",t:"d",x:"Oltre 100 referenze in consegna immediata (sito)."},
+ {n:"Nona Source",s:"13P A24",c:"Parigi",t:"d",x:"Deadstock LVMH, nessun minimo, lotti da 1 a 5 pelli (scheda fiera). Niente continuità di colore."},
+ {n:"Nuova Leon",s:"9P G6-G8",c:"Chiampo (VI)",t:"d",x:"Croste di vitello scamosciate: oltre 90 colori a stock (sito)."},
+ {n:"A22",s:"11P M11-M21",c:"Chiampo (VI)",t:"d",x:"Scamosciati colorati \"sempre pronti a consegna\" (sito). Stesso stand di Opera e Atlantica."},
+ {n:"Malaigia Pellami",s:"13P B18-B20",c:"Monte Urano (FM)",t:"d",x:"Bovino base (nappa, nubuck, croste, vernice) in pronta consegna da stock. Qualità base."},
+ {n:"Ingropelli / Amaltea",s:"11P U17-U21",c:"Scandicci (FI)",t:"d",x:"Stock di 85 colori di camoscio e nappa d'agnello: per fodere di mocassini e pantofole."},
+ {n:"Hiriar",s:"11P E21",c:"Graulhet, Francia",t:"d",x:"\"Pelli in stock\": nappa ovina e caprina, scamosciati, croste d'agnello (scheda fiera). Per fodere."},
+ {n:"Multipel / GVT Fast",s:"11P P1-P7",c:"Fucecchio (FI)",t:"d",x:"Pronto magazzino online del Gruppo Vecchia Toscana, stesso stand di Ilcea (sito gvtfast.com)."},
+ {n:"Leder Hofmann",s:"13P H5",c:"Odelzhausen, Germania",t:"d",x:"500.000 m² di rimanenze di case moda a prezzo di realizzo (sito). Affari veri su lotti singoli, nessuna continuità."},
+]},
+{g:"Pelle: grossisti, agenti e rivenditori a pelle singola",items:[
+ {n:"Fisap",s:"13P B17-B19, C18-C20",c:"Civitanova Marche (MC)",t:"d",x:"Grossista con \"vasto assortimento e disponibilità a magazzino\", anche cuoio da suola; 70 colori di camoscio vitello sempre disponibili (scheda e sito)."},
+ {n:"Paccapelo Divisione Pellami",s:"13P B11",c:"Montegranaro (FM)",t:"p",x:"Grossista marchigiano: cuoio da suola, cintura, crosta per tacchi, esotici."},
+ {n:"Rigato Romano",s:"13P C15-C17",c:"Vigonovo (VE)",t:"p",x:"Piccola conceria a 5 km da Saonara: bovino e montone da fodera, ricarichi in giornata."},
+ {n:"San Marco Leathers",s:"9P R15",c:"Arzignano (VI)",t:"p",x:"Commerciante all'ingrosso LWG di scamosciato e pelli da scarpa."},
+ {n:"Diana Pelli · Alvin Pelli",s:"13P C11-C13 · 9P M9-M13",c:"Casandrino (NA)",t:"p",x:"Commercianti campani di vitelli, capre, camosci: stock e prezzi bassi, logistica lunga."},
+ {n:"Maison Fichet",s:"13P M9, N10",c:"Lione, Francia",t:"d",x:"Grossista dal 1896 con 3.500 colori, serve \"giovani creatori e piccoli artigiani\", vende anche ritagli (sito)."},
+ {n:"Brizzi Agenzie",s:"13P C12",c:"Milano",t:"p",x:"Agente con deposito di pelli estere (scamosciati inglesi, cordovan, box calf): piccoli lotti in Italia."},
+ {n:"Europelli Trading / Sirpelli",s:"13P E1-E3",c:"San Vittore Olona (MI)",t:"p",x:"Trader di vitello, cervo, canguro, cordovan: campionature senza minimo, prezzi da intermediario."},
+ {n:"Alberto Rosi",s:"13P F4",c:"Pieve a Nievole (PT)",t:"p",x:"Agente multi-conceria di fodere e nappa: aggrega piccoli ordini da più concerie."},
+ {n:"Tuscan Group",s:"13P H9, K10",c:"Fucecchio (FI)",t:"p",x:"Intermediario pellami LWG, 3-5 addetti."},
+ {n:"Ilcea webshop",s:"11P P1-P7",c:"Fucecchio (FI)",t:"d",x:"Vende pelli singole online in grado A e B (70–180 € a pelle): caro, ma zero minimo."},
+ {n:"Tusting & Burnett",s:"13P C12",c:"Bedford, Regno Unito",t:"d",x:"Shop online a pelle singola di calf burnishable e capra vegetale."},
+ {n:"Maryam",s:"11P P29, R28-R30",c:"Santa Croce (PI)",t:"d",x:"Shell cordovan e cavallo venduti anche a pezzo singolo tramite BuyLeatherOnline."},
+ {n:"Conceria Opera",s:"11P M11-M21",c:"Santa Croce (PI)",t:"p",x:"Scamosciato rivenduto a dettaglio da Buckleguy: abituata ai piccoli lotti."},
+ {n:"Fonte Velha (J. F. Inácio)",s:"11P N28-N30",c:"Alcanena, Portogallo",t:"d",x:"E-commerce fvleather.com: vegetale per guardolo, solette, cinture e suola a pezzo."},
+]},
+{g:"Cuoio, fondo e guardoli",items:[
+ {n:"Dupelco · Pio Dusini \"Elefante\"",s:"11P M28",c:"Cles (TN)",t:"d",x:"\"Cuoio per artigiano\" e suole già tranciate a catalogo: nato per vendere al calzolaio."},
+ {n:"Gi.Elle.Emme",s:"11P R19-R21",c:"Ponte a Egola (PI)",t:"p",x:"Reparto interno di taglio suole: suole tranciate a paio invece del groppone intero."},
+ {n:"Casali 2.0",s:"22P E28",c:"Castelfidardo (AN)",t:"d",x:"Tacchi, sottotacchi e mezze suole venduti a paio da oltre 100 distributori (sito e negozi per calzolai)."},
+ {n:"Tre Bi",s:"24P B29",c:"Cornuda (TV)",t:"d",x:"Sezioni \"forniture per calzolai online\" sul sito: guardoli Goodyear e norvegesi a metraggio."},
+ {n:"Svig",s:"24P D8-D10",c:"Genova",t:"d",x:"Tacchi, mezze suole e tendiscarpe in plastica venduti a paio online. Livello riparazione."},
+ {n:"Volpi (via distributori)",s:"9P G25-G29",c:"Ponte a Egola (PI)",t:"p",x:"Un distributore vende suole Volpi a paio: chiedi allo stand l'agente per il Veneto."},
+]},
+{g:"Accessori, cura e minuteria",items:[
+ {n:"Ovac",s:"24P F21-F23",c:"Montegranaro (FM)",t:"d",x:"Magazzino con punto vendita per calzolai, oltre 10.000 articoli: fibbie, occhielli, lacci, cerniere, puntali, lucidi (sito)."},
+ {n:"Sollini Gino",s:"24P N21-N23",c:"Monte Urano (FM)",t:"d",x:"Distributore ufficiale YKK e ingrosso minuteria: cerniere Excella a piccole quantità (sito)."},
+ {n:"Ciac",s:"22P E18-E20",c:"Pieve Emanuele (MI)",t:"d",x:"\"Tutto per calzaturifici, negozi e riparatori\" dal 1967: forme, tendiscarpe, suole, tacchi, utensili, creme (catalogo online)."},
+ {n:"Alfredo Carrea & Figli",s:"24P L22",c:"Genova",t:"d",x:"Shop B2B ordini.carreaonline.it: lucidi, creme, spazzole, tendiscarpe, lacci, kit."},
+ {n:"Pidigi",s:"22P H15-H19",c:"Verona",t:"d",x:"Distributore con outlet online fino a -80 %: tinture Fenice, puntali, contrafforti, tendiscarpe."},
+ {n:"Tan Company Italia · F.lli Chiesa",s:"22P C12-C14 · 22P F25",c:"Napoli · Roma",t:"d",x:"E-commerce professionali di attrezzi, consumabili e chimica Fenice per calzolai."},
+ {n:"Barbieri Fratelli (Movi)",s:"24P D8-D10",c:"Genova",t:"p",x:"Oltre 10.000 articoli con rete agenti: lucidi, lacci, solette Pedag."},
+ {n:"Stringhificio Serrano",s:"22P P7-P9",c:"Serra de' Conti (AN)",t:"d",x:"Linea Lacesone-Linkup per calzolai e distribuzione: stringhe appaiate anche personalizzate."},
+ {n:"Nanni 1955",s:"24P N28-N30",c:"Porto Sant'Elpidio (FM)",t:"d",x:"Magazzino di 2.500 m² di lacci, elastici, nastri (sito)."},
+ {n:"Cieffe Filati",s:"22P H11-H13",c:"Quarrata (PT)",t:"d",x:"Oltre 10.000 referenze di filati pronte a magazzino (sito)."},
+ {n:"Centro Accessori",s:"22P M28",c:"Monte San Giusto (MC)",t:"p",x:"Grossista di fibbie, lacci e componenti nel distretto maceratese."},
+ {n:"Magic Sfea",s:"22P E1-E3",c:"Rudiano (BS)",t:"p",x:"Circa 5.000 fibbie a catalogo: niente stampi, minimo tipico 50–100 pezzi per articolo."},
+ {n:"Buckleguy",s:"24P F25",c:"Newburyport, USA",t:"d",x:"Zero minimo, sconti da 10, 100 e 500 pezzi (sito). Spedizione e dazi dagli USA."},
+ {n:"Victoria Spazzolificio",s:"24P A19",c:"Vittorio Veneto (TV)",t:"p",x:"Produttore con set completi e private label: minimi da produttore italiano, non da importatore."},
+ {n:"Tradigo Giovanni",s:"24P H22",c:"Milano",t:"p",x:"Distribuzione nazionale a negozi e calzolai: tendiscarpe e sacchetti anche in piccoli lotti."},
+]},
+];
+function renderStock(){
+  const box=document.getElementById("stock");box.innerHTML="";
+  STOCK.forEach(g=>{
+    const d=document.createElement("div");d.className="stk-group";
+    d.innerHTML=`<h3>${g.g}</h3>`+g.items.map(x=>`<div class="stk"><div class="st">${x.s.split(" ")[0]}<small>${x.s.replace(/\d+P /g,"")}</small></div><div class="tx"><b>${x.n}<span class="tag ${x.t}">${x.t==="d"?"dichiarato":"probabile"}</span></b><span>${x.c}. ${x.x}</span></div></div>`).join("");
+    box.appendChild(d);
+  });
+}
+renderStock();
 </script>
