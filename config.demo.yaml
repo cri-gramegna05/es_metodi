@@ -37,6 +37,32 @@ sources:
       - domain: "127.0.0.1:8765"
         collections: ["uomo-scarpe"]
 
+classify:
+  enabled: true
+  backend: ollama          # real Ollama protocol, pointed at scripts/fake_ollama.py
+  host: "http://127.0.0.1:11435"
+  model: "fake-gemma"
+  max_retries: 3
+  min_prescore: 30
+
+enrich:
+  enabled: true
+  backend: stub            # no ANTHROPIC_API_KEY needed; set backend: claude to use Claude
+  min_score: 70
+  max_per_run: 5
+
+notify:
+  min_score: 70
+  score_delta_threshold: 15
+  telegram:
+    enabled: true
+    api_base: "http://127.0.0.1:18080"   # scripts/fake_telegram.py
+    bot_token: "fake-token"
+    chat_id: "12345"
+
+sheets:
+  enabled: false           # needs a real service account
+
 rules:
   allowed_countries: ["IT"]
   price_min: 250

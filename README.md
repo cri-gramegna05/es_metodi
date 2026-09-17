@@ -12,13 +12,13 @@ LLM, enriches the best ones with Claude and publishes to Google Sheets + Telegra
 | `collectors/` (html, shopify, farfetch, yoox, giglio) | done |
 | `dedupe/` (name normalization + cross-source merge) | done |
 | `rules/` (deterministic filter + prescore) | done |
-| CLI (`run`, `show`, `stats`, `sources`, `init-db`) | done |
-| `classify/` (Ollama) | not implemented yet |
-| `enrich/` (Claude) | not implemented yet |
-| `publish/` (Sheets + Telegram) | not implemented yet |
+| `classify/` (Ollama, structured JSON + retry) | done |
+| `enrich/` (Claude + server-side web search) | done |
+| `publish/` (Google Sheets + Telegram) | done |
+| CLI (`run`, `show`, `brief`, `stats`, `sources`, `init-db`) | done |
 
-`config.yaml` already carries the settings for the three pending modules, so enabling them
-later is a config change, not a rewrite.
+Every external dependency has an offline stand-in, so the whole pipeline runs with no
+model, no API key and no network — see *Dry-run the whole pipeline* below.
 
 ## Setup
 
@@ -31,26 +31,44 @@ cp config.example.yaml config.yaml   # then edit
 
 `scout` is also available as `python -m scout.cli`.
 
-## Try it without touching a real site
+## Dry-run the whole pipeline (no model, no keys, no network)
 
-The repo ships a fixture shop (`tests/fixtures/site`) with a listing page and a Shopify
-`products.json`. Serve it and run the pipeline against it:
+Three stand-ins ship with the repo, each speaking the real protocol:
+
+| Real service | Stand-in |
+| --- | --- |
+| a shop (listing HTML + Shopify `products.json`) | `scripts/serve_fixtures.sh` on :8765 |
+| Ollama `/api/chat` | `scripts/fake_ollama.py` on :11435 (`--flaky` exercises the retry path) |
+| Telegram Bot API | `scripts/fake_telegram.py` on :18080 (logs the messages) |
 
 ```bash
-./scripts/serve_fixtures.sh &            # http://127.0.0.1:8765
-scout run --config config.demo.yaml
+./scripts/serve_fixtures.sh &
+python scripts/fake_ollama.py --port 11435 --flaky &
+python scripts/fake_telegram.py --port 18080 --out data/telegram.log &
+
+scout run --config config.demo.yaml            # collect -> rules -> classify -> enrich -> notify
 scout show "Edhèn Milano" --config config.demo.yaml
+scout brief "Edhèn Milano" --config config.demo.yaml
 scout stats --config config.demo.yaml
 ```
+
+`config.demo.yaml` points `classify` at the fake Ollama, uses `enrich.backend: stub`
+(no API key), and sends notifications to the fake Bot API. Switch each one over by editing
+the config: `classify.host` to your real Ollama, `enrich.backend: claude`, and the real
+Telegram token + `sheets.enabled: true`.
 
 ## Commands
 
 ```bash
-scout run                      # all enabled sources
+scout run                      # all enabled sources, all stages
 scout run --source giglio      # one source, even if disabled in config
+scout run --no-classify        # stop after the deterministic rules
+scout run --no-enrich          # classify but skip the paid Claude stage
+scout run --no-publish         # no Telegram, no Sheets
 scout run --dry-run            # parse and score, write nothing
 scout run --json               # machine-readable summary
-scout show "Edhèn Milano"      # observations, rules verdict, history
+scout show "Edhèn Milano"      # observations, classification, rules verdict
+scout brief "Edhèn Milano"     # the Markdown brief Claude wrote
 scout stats                    # database and last-run counters
 scout sources                  # configured sources and their state
 ```
@@ -86,6 +104,25 @@ discount ≥ 40 %, few items, Italian, men's.
 Unknown values (a marketplace rarely states a brand's country) are kept, not dropped — the
 classification stage decides.
 
+## Classification, enrichment, publishing
+
+**classify** sends the observed facts (never our own score) to a local Ollama model with
+`format` set to the Pydantic JSON schema. The answer is validated; on invalid JSON the
+model is re-asked with the validation error in the prompt, up to `max_retries`. Brands
+below `classify.min_prescore` never reach the LLM.
+
+**enrich** runs only for scores at or above `enrich.min_score`, at most `max_per_run` per
+night: Claude (`claude-opus-5`) with the server-side `web_search` tool researches the
+brand and writes the Italian brief (storia, fondatori, distribuzione, stima fatturato,
+segnali di stress, perché interessante, prossimo passo). An existing brief is reused until
+it is `refresh_after_days` old or the score moves by `rerun_on_score_delta` — a nightly
+re-run does not re-pay for the same brief.
+
+**publish** upserts one row per brand in the `candidati` tab (keyed on the slug, so it
+updates instead of appending) and appends a run row to `log`. Telegram fires only for a
+brand that is new or whose score moved more than `score_delta_threshold`, and each
+notification is recorded in SQLite so it is never sent twice for the same run.
+
 ## Storage
 
 SQLite (`data/scout.db`), one row per brand keyed on its normalized slug; each run appends
@@ -113,10 +150,11 @@ launchctl start com.venexis.scout
 
 Logs land in `data/scout.log` (structured) plus the stdout/stderr files named in the plist.
 
-## Still to wire (next steps)
+## Going live
 
-- **Ollama** — `brew install ollama && ollama serve && ollama pull gemma3:4b`; model and
-  host are already in `config.yaml` under `classify`.
+- **Ollama** — `brew install ollama && ollama serve && ollama pull gemma3:4b`, then set
+  `classify.host` / `classify.model` in `config.yaml`.
+- **Anthropic** — `export ANTHROPIC_API_KEY=...` and set `enrich.backend: claude`.
 - **Google service account** — create it in Google Cloud, enable the Sheets API, download
   the JSON key to `credentials/service_account.json`, share the sheet with the service
   account e-mail; `sheets` section in `config.yaml`.

@@ -49,3 +49,47 @@ def http_cfg() -> HttpConfig:
 
 def source(**kwargs) -> SourceConfig:
     return SourceConfig(**kwargs)
+
+
+class FakeTelegram:
+    """Stands in for TelegramNotifier: records what would have been sent."""
+
+    def __init__(self, ok: bool = True) -> None:
+        self.ok = ok
+        self.sent: list[str] = []
+
+    def send(self, text: str, max_retries: int = 3) -> bool:
+        self.sent.append(text)
+        return self.ok
+
+
+class FakeWorksheet:
+    def __init__(self, title: str) -> None:
+        self.title = title
+        self.rows: list[list] = []
+
+    def get_all_values(self) -> list[list[str]]:
+        return [[str(c) for c in row] for row in self.rows]
+
+    def update(self, range_name: str, values: list[list]) -> None:
+        index = int(range_name.lstrip("A")) - 1
+        while len(self.rows) <= index:
+            self.rows.append([])
+        self.rows[index] = values[0]
+
+    def append_row(self, values: list) -> None:
+        self.rows.append(values)
+
+
+class FakeSpreadsheet:
+    def __init__(self) -> None:
+        self.tabs: dict[str, FakeWorksheet] = {}
+
+    def worksheet(self, title: str) -> FakeWorksheet:
+        if title not in self.tabs:
+            raise KeyError(title)          # gspread raises WorksheetNotFound
+        return self.tabs[title]
+
+    def add_worksheet(self, title: str, rows: int = 100, cols: int = 20) -> FakeWorksheet:
+        self.tabs[title] = FakeWorksheet(title)
+        return self.tabs[title]

@@ -234,6 +234,10 @@ class Database:
         ).fetchone()
         return int(row["brand_id"]) if row else None
 
+    def current_scores(self) -> dict[str, int | None]:
+        return {r["slug"]: r["current_score"]
+                for r in self.conn.execute("SELECT slug, current_score FROM brands")}
+
     def set_score(self, brand_id: int, score: int | None, stage: str) -> None:
         self.conn.execute(
             "UPDATE brands SET current_score=?, current_stage=? WHERE id=?",
@@ -291,6 +295,79 @@ class Database:
              json.dumps(signals), utcnow_iso()),
         )
         self.conn.commit()
+
+    # --- classifications --------------------------------------------------
+
+    def save_classification(
+        self, brand_id: int, run_id: int, model: str, data: dict[str, Any]
+    ) -> None:
+        self.conn.execute(
+            """INSERT INTO classifications(brand_id, run_id, model, is_italian, is_mens,
+                   positioning, founder_type, red_flags_json, score, rationale, raw_json,
+                   created_at)
+               VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (brand_id, run_id, model, int(bool(data.get("is_italian"))),
+             int(bool(data.get("is_mens"))), data.get("positioning"), data.get("founder_type"),
+             json.dumps(data.get("red_flags", [])), data.get("score"), data.get("rationale"),
+             json.dumps(data, default=str), utcnow_iso()),
+        )
+        self.conn.commit()
+
+    def latest_classification(self, brand_id: int) -> sqlite3.Row | None:
+        return self.conn.execute(
+            "SELECT * FROM classifications WHERE brand_id=? ORDER BY id DESC LIMIT 1",
+            (brand_id,),
+        ).fetchone()
+
+    # --- enrichments / notifications --------------------------------------
+
+    def save_enrichment(
+        self, brand_id: int, run_id: int, model: str, markdown: str,
+        revenue_estimate_eur: float | None, sources: list[str],
+    ) -> None:
+        self.conn.execute(
+            """INSERT INTO enrichments(brand_id, run_id, model, markdown,
+                   revenue_estimate_eur, sources_json, created_at)
+               VALUES(?,?,?,?,?,?,?)""",
+            (brand_id, run_id, model, markdown, revenue_estimate_eur,
+             json.dumps(sources), utcnow_iso()),
+        )
+        self.conn.commit()
+
+    def latest_enrichment(self, brand_id: int) -> sqlite3.Row | None:
+        return self.conn.execute(
+            "SELECT * FROM enrichments WHERE brand_id=? ORDER BY id DESC LIMIT 1", (brand_id,)
+        ).fetchone()
+
+    def enrichment_age_days(self, brand_id: int) -> float | None:
+        row = self.latest_enrichment(brand_id)
+        if row is None:
+            return None
+        created = datetime.fromisoformat(row["created_at"])
+        if created.tzinfo is None:
+            created = created.replace(tzinfo=timezone.utc)
+        return (datetime.now(timezone.utc) - created).total_seconds() / 86400
+
+    def record_notification(
+        self, brand_id: int, run_id: int, channel: str, kind: str,
+        old_score: int | None, new_score: int | None,
+    ) -> None:
+        self.conn.execute(
+            """INSERT INTO notifications(brand_id, run_id, channel, kind, old_score,
+                   new_score, sent_at) VALUES(?,?,?,?,?,?,?)""",
+            (brand_id, run_id, channel, kind, old_score, new_score, utcnow_iso()),
+        )
+        self.conn.commit()
+
+    def already_notified(self, brand_id: int, run_id: int, channel: str) -> bool:
+        row = self.conn.execute(
+            "SELECT 1 FROM notifications WHERE brand_id=? AND run_id=? AND channel=? LIMIT 1",
+            (brand_id, run_id, channel),
+        ).fetchone()
+        return row is not None
+
+    def brand_row(self, brand_id: int) -> sqlite3.Row | None:
+        return self.conn.execute("SELECT * FROM brands WHERE id=?", (brand_id,)).fetchone()
 
     # --- stats ------------------------------------------------------------
 

@@ -13,6 +13,9 @@ dependencies = [
     "rapidfuzz>=3.9",
     "structlog>=24.1",
     "rich>=13.7",
+    "anthropic>=1.6",
+    "gspread>=6.2",
+    "google-auth>=2.30",
 ]
 
 [project.optional-dependencies]

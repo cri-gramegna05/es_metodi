@@ -64,17 +64,28 @@ class ScoringConfig(BaseModel):
 
 
 class ClassifyConfig(BaseModel):
+    enabled: bool = True
+    backend: str = "ollama"         # ollama | stub (stub = offline, no model needed)
     host: str = "http://localhost:11434"
     model: str = "gemma3:4b"
     temperature: float = 0.0
+    timeout_seconds: float = 120.0
     max_retries: int = 3
-    min_prescore: int = 30          # skip LLM below this
+    min_prescore: int = 30          # skip the LLM below this prescore
 
 
 class EnrichConfig(BaseModel):
-    model: str = "claude-sonnet-5"
-    min_score: int = 70
-    max_per_run: int = 10
+    enabled: bool = True
+    backend: str = "claude"          # claude | stub (stub = offline, no API key)
+    model: str = "claude-opus-5"
+    min_score: int = 70              # only strong candidates reach Claude
+    max_per_run: int = 10            # cost guard
+    max_tokens: int = 8000
+    effort: str = "medium"           # low | medium | high | xhigh | max
+    max_searches: int = 6            # web_search max_uses
+    refresh_after_days: int = 30     # re-run an existing brief only when this old
+    rerun_on_score_delta: float = 15.0   # ...or when the score moved this much
+    timeout_seconds: float = 300.0
     api_key_env: str = "ANTHROPIC_API_KEY"
 
 
@@ -82,6 +93,7 @@ class TelegramConfig(BaseModel):
     enabled: bool = False
     bot_token: str = ""
     chat_id: str = ""
+    api_base: str = "https://api.telegram.org"
 
 
 class SheetsConfig(BaseModel):

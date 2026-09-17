@@ -103,16 +103,27 @@ scoring:               # deterministic prescore, 0-100
   few_items_threshold: 30
 
 classify:
+  enabled: true
+  backend: ollama        # ollama | stub (stub runs with no model, for dev and CI)
   host: "http://localhost:11434"
   model: "gemma3:4b"
   temperature: 0.0
-  max_retries: 3
-  min_prescore: 30
+  timeout_seconds: 120
+  max_retries: 3         # retried with the validation error in the prompt
+  min_prescore: 30       # brands below this never reach the LLM
 
 enrich:
-  model: "claude-sonnet-5"
-  min_score: 70
-  max_per_run: 10
+  enabled: true
+  backend: claude        # claude | stub (stub writes a brief from observed data only)
+  model: "claude-opus-5"
+  min_score: 70          # only candidates at or above this reach Claude
+  max_per_run: 10        # cost guard
+  max_tokens: 8000
+  effort: medium         # low | medium | high | xhigh | max
+  max_searches: 6        # web_search max_uses per brand
+  refresh_after_days: 30 # an existing brief is reused until this old...
+  rerun_on_score_delta: 15   # ...unless the score moved at least this much
+  timeout_seconds: 300
   api_key_env: ANTHROPIC_API_KEY
 
 notify:
@@ -122,6 +133,7 @@ notify:
     enabled: false
     bot_token: "${TELEGRAM_BOT_TOKEN}"
     chat_id: "${TELEGRAM_CHAT_ID}"
+    # api_base: "http://127.0.0.1:18080"   # point at scripts/fake_telegram.py to dry-run
 
 sheets:
   enabled: false
