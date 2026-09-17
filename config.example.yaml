@@ -1,0 +1,131 @@
+# Scout configuration. Copy to config.yaml and edit. ${VAR} is read from the environment.
+
+db_path: data/scout.db
+cache_dir: data/cache
+log_file: data/scout.log
+log_level: INFO
+
+http:
+  # Be honest about who you are and how to reach you.
+  user_agent: "ScoutBot/0.1 (+https://venexis.example; scout@venexis.example)"
+  request_delay_seconds: 3.0     # per host; robots.txt Crawl-delay wins if larger
+  timeout_seconds: 30
+  max_retries: 4
+  backoff_base_seconds: 2.0
+  respect_robots: true           # keep true: a disallowed URL is skipped, not fetched
+  cache_ttl_hours: 24
+
+sources:
+  # --- marketplaces -----------------------------------------------------
+  # Farfetch and YOOX gate their listings heavily (robots.txt + bot protection).
+  # Left off by default: the collector exists, enable it only if robots.txt allows
+  # the listing path for your user-agent — Scout skips disallowed URLs anyway.
+  farfetch:
+    type: farfetch
+    enabled: false
+    pages: 3
+    gender: men
+    notes: "robots.txt gated — verify before enabling"
+
+  yoox:
+    type: yoox
+    enabled: false
+    pages: 3
+    gender: men
+    notes: "robots.txt gated — verify before enabling"
+
+  giglio:
+    type: giglio
+    enabled: true
+    pages: 3
+    gender: men
+    # country: IT   # set only when the source lists brands of one country only —
+    #               # a marketplace selling Italian shops still carries foreign brands
+    notes: "Italian multibrand, lighter gating"
+
+  # --- generic HTML listing --------------------------------------------
+  # Add any shop by URL + CSS selectors; JSON-LD is parsed first when present.
+  # example_boutique:
+  #   type: html
+  #   enabled: false
+  #   pages: 2
+  #   gender: men
+  #   country: IT
+  #   start_urls:
+  #     - "https://example.com/uomo/scarpe?page={page}"
+  #   selectors:
+  #     item: "div.product-card"
+  #     brand: ".product-card__brand"
+  #     title: ".product-card__title"
+  #     price: ".price--current"
+  #     full_price: ".price--was"
+  #     link: "a"
+
+  # --- Shopify storefronts ---------------------------------------------
+  # Many small Italian boutiques run Shopify: /products.json gives brand (vendor),
+  # price and compare_at_price (i.e. the discount) without HTML parsing.
+  # Verify each domain's robots.txt before enabling.
+  shopify_it:
+    type: shopify
+    enabled: false
+    pages: 3
+    gender: men
+    shops:
+      - domain: "shop.example.com"
+        collections: ["uomo-scarpe"]
+    notes: "add verified Shopify boutiques here"
+
+rules:
+  allowed_countries: ["IT"]
+  price_min: 250
+  price_max: 700
+  price_band_tolerance: 0.2
+  min_items: 2
+  max_items: 80          # a brand with a huge assortment is not a small target
+  chronic_discount_pct: 40
+  min_sources: 1
+  excluded_brands:       # plain names; matched on the normalized slug
+    - Gucci
+    - Prada
+    - "Tod's"
+    - Santoni
+    - "Church's"
+    - Salvatore Ferragamo
+    - Golden Goose
+    - Common Projects
+
+scoring:               # deterministic prescore, 0-100
+  price_in_band: 20
+  chronic_discount: 25
+  few_items: 20
+  italian: 20
+  mens: 15
+  few_items_threshold: 30
+
+classify:
+  host: "http://localhost:11434"
+  model: "gemma3:4b"
+  temperature: 0.0
+  max_retries: 3
+  min_prescore: 30
+
+enrich:
+  model: "claude-sonnet-5"
+  min_score: 70
+  max_per_run: 10
+  api_key_env: ANTHROPIC_API_KEY
+
+notify:
+  min_score: 70
+  score_delta_threshold: 15
+  telegram:
+    enabled: false
+    bot_token: "${TELEGRAM_BOT_TOKEN}"
+    chat_id: "${TELEGRAM_CHAT_ID}"
+
+sheets:
+  enabled: false
+  spreadsheet_id: "${SCOUT_SHEET_ID}"
+  credentials_file: "credentials/service_account.json"
+  candidates_tab: "candidati"
+  log_tab: "log"

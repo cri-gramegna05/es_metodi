@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.venexis.scout</string>
+
+    <!-- Edit these three paths to match your machine. -->
+    <key>WorkingDirectory</key>
+    <string>/Users/CHANGEME/code/scout</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/CHANGEME/code/scout/.venv/bin/scout</string>
+        <string>run</string>
+        <string>--config</string>
+        <string>/Users/CHANGEME/code/scout/config.yaml</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>3</integer>
+        <key>Minute</key><integer>17</integer>
+    </dict>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+        <!-- Secrets are read from here; config.yaml only references ${VAR}. -->
+        <key>ANTHROPIC_API_KEY</key><string>CHANGEME</string>
+        <key>TELEGRAM_BOT_TOKEN</key><string>CHANGEME</string>
+        <key>TELEGRAM_CHAT_ID</key><string>CHANGEME</string>
+        <key>SCOUT_SHEET_ID</key><string>CHANGEME</string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/CHANGEME/code/scout/data/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/CHANGEME/code/scout/data/launchd.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>

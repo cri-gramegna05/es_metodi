@@ -1,0 +1,47 @@
+# Demo configuration: runs the full collect->dedupe->rules pipeline against the
+# local fixture site in tests/fixtures/site (served by scripts/serve_fixtures.sh).
+db_path: data/demo.db
+cache_dir: data/demo-cache
+log_file: data/demo.log
+log_level: INFO
+
+http:
+  user_agent: "ScoutBot/0.1 (+https://venexis.example; scout@venexis.example)"
+  request_delay_seconds: 0.2
+  cache_ttl_hours: 0.001
+  respect_robots: true
+
+sources:
+  demo_marketplace:
+    type: html
+    enabled: true
+    pages: 3
+    gender: men
+    start_urls:
+      - "http://127.0.0.1:8765/uomo-scarpe-{page}.html"
+    selectors:
+      item: "li.product-item"
+      brand: ".product-brand"
+      title: ".product-name"
+      price: ".special-price .price"
+      full_price: ".old-price .price"
+      link: "a.product-item-link"
+
+  demo_shopify:
+    type: shopify
+    enabled: true
+    pages: 1
+    gender: men
+    scheme: http
+    shops:
+      - domain: "127.0.0.1:8765"
+        collections: ["uomo-scarpe"]
+
+rules:
+  allowed_countries: ["IT"]
+  price_min: 250
+  price_max: 700
+  min_items: 2
+  max_items: 80
+  chronic_discount_pct: 40
+  excluded_brands: ["Tod's", "Golden Goose", "Church's"]

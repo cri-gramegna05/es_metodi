@@ -1,0 +1,117 @@
+{
+  "products": [
+    {
+      "id": 1001,
+      "title": "Mocassino Brera Suede",
+      "handle": "mocassino-brera-suede",
+      "vendor": "Edhèn Milano",
+      "product_type": "Loafers",
+      "tags": [
+        "uomo",
+        "mocassini"
+      ],
+      "variants": [
+        {
+          "id": 9001,
+          "title": "42",
+          "price": "285.00",
+          "compare_at_price": "590.00"
+        }
+      ]
+    },
+    {
+      "id": 1002,
+      "title": "Derby Scala Calf",
+      "handle": "derby-scala-calf",
+      "vendor": "Edhèn Milano",
+      "product_type": "Derby",
+      "tags": [
+        "uomo"
+      ],
+      "variants": [
+        {
+          "id": 9002,
+          "title": "42",
+          "price": "330.00",
+          "compare_at_price": "640.00"
+        }
+      ]
+    },
+    {
+      "id": 1003,
+      "title": "Mocassino in pelle",
+      "handle": "mocassino-in-pelle",
+      "vendor": "Fabi",
+      "product_type": "Shoes",
+      "tags": [
+        "uomo",
+        "scarpe"
+      ],
+      "variants": [
+        {
+          "id": 9003,
+          "title": "42",
+          "price": "295.00",
+          "compare_at_price": "410.00"
+        }
+      ]
+    },
+    {
+      "id": 1004,
+      "title": "Stivaletto Chelsea",
+      "handle": "stivaletto-chelsea",
+      "vendor": "Fabi",
+      "product_type": "Shoes",
+      "tags": [
+        "uomo",
+        "scarpe"
+      ],
+      "variants": [
+        {
+          "id": 9004,
+          "title": "42",
+          "price": "340.00",
+          "compare_at_price": "470.00"
+        }
+      ]
+    },
+    {
+      "id": 1005,
+      "title": "Sneakers Medalist Low",
+      "handle": "sneakers-medalist-low",
+      "vendor": "Autry",
+      "product_type": "Sneakers",
+      "tags": [
+        "uomo",
+        "sneakers"
+      ],
+      "variants": [
+        {
+          "id": 9005,
+          "title": "42",
+          "price": "145.00",
+          "compare_at_price": "180.00"
+        }
+      ]
+    },
+    {
+      "id": 1006,
+      "title": "Giacca cerata",
+      "handle": "giacca-cerata",
+      "vendor": "Barbour",
+      "product_type": "Outerwear",
+      "tags": [
+        "uomo",
+        "giacche"
+      ],
+      "variants": [
+        {
+          "id": 9006,
+          "title": "42",
+          "price": "280.00",
+          "compare_at_price": null
+        }
+      ]
+    }
+  ]
+}
