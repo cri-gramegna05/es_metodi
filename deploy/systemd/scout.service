@@ -1,0 +1,8 @@
+[Unit]
+Description=Scout nightly run
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Change the path if you cloned somewhere else.
+ExecStart=%h/scout/deploy/run_nightly.sh

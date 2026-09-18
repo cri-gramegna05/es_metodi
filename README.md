@@ -139,7 +139,52 @@ merged with a fuzzy match above the configured threshold.
 Unit tests cover normalization/merging and every rule; integration tests run the collectors
 and the whole pipeline against the saved fixtures, with no network.
 
-## Nightly run (launchd)
+## Nightly run on WSL (Ubuntu)
+
+```bash
+# 1. system packages (Ubuntu 22.04/24.04 on WSL2)
+sudo apt update && sudo apt install -y git curl build-essential
+
+# 2. uv (brings its own Python 3.12, so the distro version does not matter)
+curl -LsSf https://astral.sh/uv/install.sh | sh && source $HOME/.local/bin/env
+uv python install 3.12
+
+# 3. the project
+git clone https://github.com/cri-gramegna05/es_metodi.git ~/scout
+cd ~/scout && git checkout claude/scout-footwear-pipeline-x7mxxm
+uv venv --python 3.12 .venv && uv pip install -e ".[dev]"
+
+# 4. Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve >/dev/null 2>&1 &
+ollama pull gemma3:4b
+
+# 5. config and secrets
+cp config.example.yaml config.yaml && cp .env.example .env   # then edit both
+```
+
+Keep the repo inside the Linux filesystem (`~/scout`), not under `/mnt/c` — SQLite and the
+HTML cache are much slower on the Windows mount.
+
+Scheduling, in order of reliability:
+
+1. **Windows Task Scheduler** (recommended: it wakes WSL if it is not running).
+   Program `C:\Windows\System32\wsl.exe`, arguments:
+   `-d Ubuntu -- bash -lc "~/scout/deploy/run_nightly.sh"`, daily at 03:17.
+2. **systemd timer** (needs `systemd=true` under `[boot]` in `/etc/wsl.conf`, then `wsl --shutdown`):
+   ```bash
+   mkdir -p ~/.config/systemd/user && cp deploy/systemd/scout.* ~/.config/systemd/user/
+   systemctl --user enable --now scout.timer
+   ```
+3. **cron inside WSL** — only fires while WSL is running:
+   ```bash
+   sudo service cron start && crontab deploy/scout.cron
+   ```
+
+`deploy/run_nightly.sh` loads `.env`, starts Ollama if it is not listening, runs the
+pipeline and appends everything to `data/nightly.log`.
+
+## Nightly run on macOS (launchd)
 
 ```bash
 cp deploy/com.venexis.scout.plist ~/Library/LaunchAgents/

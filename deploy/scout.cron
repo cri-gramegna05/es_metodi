@@ -1,0 +1,5 @@
+# Nightly Scout run inside WSL. Install with:  crontab deploy/scout.cron
+# Requires cron to be running:  sudo service cron start
+# (and WSL to be up at that time — see the Windows Task Scheduler option in the README)
+SHELL=/bin/bash
+17 3 * * * $HOME/scout/deploy/run_nightly.sh
