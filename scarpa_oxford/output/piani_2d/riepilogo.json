@@ -1,0 +1,454 @@
+{
+ "modello": "Oxford uomo cap-toe, allacciatura chiusa, 5 occhielli",
+ "taglia": 42,
+ "unita": "mm",
+ "margini_montaggio_mm": {
+  "puntale": 16,
+  "mascherina": 16,
+  "quartiere_esterno": 16,
+  "quartiere_interno": 16,
+  "bacchetta": 16,
+  "fodera_avampiede": 14,
+  "fodera_quartiere_esterno": 14,
+  "fodera_quartiere_interno": 14,
+  "contrafforte": 14,
+  "rinforzo_puntale": 10
+ },
+ "rifilatura_fodere_mm": 3.0,
+ "sfrido_stimato": {
+  "vitello box": 0.2,
+  "pelle fodera": 0.15,
+  "altri": 0.1
+ },
+ "pezzi": [
+  {
+   "nome": "sottopiede",
+   "titolo": "Sottopiede",
+   "materiale": "cuoio/cartone fibra 2,5 mm",
+   "spessore_mm": 2.5,
+   "quantita_paio": 2,
+   "area_cm2": 185.9,
+   "area_paio_dm2": 3.72,
+   "ingombro_mm": [
+    275.3,
+    93.2
+   ],
+   "perimetro_taglio_mm": 629.4,
+   "errore_sviluppo_pct": 0.61,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.61,
+    "errore_lunghezze_p95_pct": 1.64,
+    "rapporto_area_2d_3d": 0.9927
+   },
+   "dxf": "dxf/sottopiede.dxf",
+   "svg": "svg/sottopiede.svg"
+  },
+  {
+   "nome": "fodera_avampiede",
+   "titolo": "Fodera avampiede",
+   "materiale": "pelle fodera (vitello) 0,8 mm",
+   "spessore_mm": 0.8,
+   "quantita_paio": 2,
+   "area_cm2": 297.2,
+   "area_paio_dm2": 5.94,
+   "ingombro_mm": [
+    194.0,
+    212.1
+   ],
+   "perimetro_taglio_mm": 697.1,
+   "errore_sviluppo_pct": 1.83,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 1.83,
+    "errore_lunghezze_p95_pct": 7.54,
+    "rapporto_area_2d_3d": 0.9979
+   },
+   "dxf": "dxf/fodera_avampiede.dxf",
+   "svg": "svg/fodera_avampiede.svg"
+  },
+  {
+   "nome": "linguetta",
+   "titolo": "Linguetta",
+   "materiale": "vitello box 1,4 mm",
+   "spessore_mm": 1.4,
+   "quantita_paio": 2,
+   "area_cm2": 47.8,
+   "area_paio_dm2": 0.96,
+   "ingombro_mm": [
+    111.4,
+    48.7
+   ],
+   "perimetro_taglio_mm": 296.1,
+   "errore_sviluppo_pct": 1.15,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 1.15,
+    "errore_lunghezze_p95_pct": 3.57,
+    "rapporto_area_2d_3d": 0.9823
+   },
+   "dxf": "dxf/linguetta.dxf",
+   "svg": "svg/linguetta.svg"
+  },
+  {
+   "nome": "fodera_quartiere_esterno",
+   "titolo": "Fodera quartiere esterno",
+   "materiale": "pelle fodera (vitello) 0,8 mm",
+   "spessore_mm": 0.8,
+   "quantita_paio": 2,
+   "area_cm2": 109.0,
+   "area_paio_dm2": 2.18,
+   "ingombro_mm": [
+    159.4,
+    112.1
+   ],
+   "perimetro_taglio_mm": 475.5,
+   "errore_sviluppo_pct": 0.7,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.7,
+    "errore_lunghezze_p95_pct": 3.44,
+    "rapporto_area_2d_3d": 0.9941
+   },
+   "dxf": "dxf/fodera_quartiere_esterno.dxf",
+   "svg": "svg/fodera_quartiere_esterno.svg"
+  },
+  {
+   "nome": "fodera_quartiere_interno",
+   "titolo": "Fodera quartiere interno",
+   "materiale": "pelle fodera (vitello) 0,8 mm",
+   "spessore_mm": 0.8,
+   "quantita_paio": 2,
+   "area_cm2": 108.6,
+   "area_paio_dm2": 2.17,
+   "ingombro_mm": [
+    159.2,
+    112.4
+   ],
+   "perimetro_taglio_mm": 475.1,
+   "errore_sviluppo_pct": 0.94,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.94,
+    "errore_lunghezze_p95_pct": 4.45,
+    "rapporto_area_2d_3d": 0.9937
+   },
+   "dxf": "dxf/fodera_quartiere_interno.dxf",
+   "svg": "svg/fodera_quartiere_interno.svg"
+  },
+  {
+   "nome": "contrafforte",
+   "titolo": "Contrafforte",
+   "materiale": "termoplastico / cuoio 1,6 mm",
+   "spessore_mm": 1.6,
+   "quantita_paio": 2,
+   "area_cm2": 92.3,
+   "area_paio_dm2": 1.85,
+   "ingombro_mm": [
+    190.7,
+    60.4
+   ],
+   "perimetro_taglio_mm": 438.5,
+   "errore_sviluppo_pct": 1.62,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 1.62,
+    "errore_lunghezze_p95_pct": 6.84,
+    "rapporto_area_2d_3d": 0.985
+   },
+   "dxf": "dxf/contrafforte.dxf",
+   "svg": "svg/contrafforte.svg"
+  },
+  {
+   "nome": "rinforzo_puntale",
+   "titolo": "Rinforzo puntale",
+   "materiale": "termoadesivo 1,0 mm",
+   "spessore_mm": 1.0,
+   "quantita_paio": 2,
+   "area_cm2": 90.2,
+   "area_paio_dm2": 1.8,
+   "ingombro_mm": [
+    83.0,
+    154.3
+   ],
+   "perimetro_taglio_mm": 382.1,
+   "errore_sviluppo_pct": 2.93,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 2.93,
+    "errore_lunghezze_p95_pct": 10.31,
+    "rapporto_area_2d_3d": 0.9776
+   },
+   "dxf": "dxf/rinforzo_puntale.dxf",
+   "svg": "svg/rinforzo_puntale.svg"
+  },
+  {
+   "nome": "quartiere_esterno",
+   "titolo": "Quartiere esterno",
+   "materiale": "vitello box 1,3 mm",
+   "spessore_mm": 1.3,
+   "quantita_paio": 2,
+   "area_cm2": 140.8,
+   "area_paio_dm2": 2.82,
+   "ingombro_mm": [
+    196.0,
+    119.4
+   ],
+   "perimetro_taglio_mm": 535.4,
+   "errore_sviluppo_pct": 0.62,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.62,
+    "errore_lunghezze_p95_pct": 3.02,
+    "rapporto_area_2d_3d": 0.9945
+   },
+   "dxf": "dxf/quartiere_esterno.dxf",
+   "svg": "svg/quartiere_esterno.svg"
+  },
+  {
+   "nome": "quartiere_interno",
+   "titolo": "Quartiere interno",
+   "materiale": "vitello box 1,3 mm",
+   "spessore_mm": 1.3,
+   "quantita_paio": 2,
+   "area_cm2": 140.3,
+   "area_paio_dm2": 2.81,
+   "ingombro_mm": [
+    194.6,
+    119.5
+   ],
+   "perimetro_taglio_mm": 533.1,
+   "errore_sviluppo_pct": 0.85,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.85,
+    "errore_lunghezze_p95_pct": 4.04,
+    "rapporto_area_2d_3d": 0.9962
+   },
+   "dxf": "dxf/quartiere_interno.dxf",
+   "svg": "svg/quartiere_interno.svg"
+  },
+  {
+   "nome": "mascherina",
+   "titolo": "Mascherina (avampiede)",
+   "materiale": "vitello box 1,3 mm",
+   "spessore_mm": 1.3,
+   "quantita_paio": 2,
+   "area_cm2": 163.1,
+   "area_paio_dm2": 3.26,
+   "ingombro_mm": [
+    109.5,
+    205.2
+   ],
+   "perimetro_taglio_mm": 592.5,
+   "errore_sviluppo_pct": 1.02,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 1.02,
+    "errore_lunghezze_p95_pct": 2.69,
+    "rapporto_area_2d_3d": 1.0088
+   },
+   "dxf": "dxf/mascherina.dxf",
+   "svg": "svg/mascherina.svg"
+  },
+  {
+   "nome": "puntale",
+   "titolo": "Puntale",
+   "materiale": "vitello box 1,3 mm",
+   "spessore_mm": 1.3,
+   "quantita_paio": 2,
+   "area_cm2": 97.0,
+   "area_paio_dm2": 1.94,
+   "ingombro_mm": [
+    85.1,
+    161.2
+   ],
+   "perimetro_taglio_mm": 393.7,
+   "errore_sviluppo_pct": 3.06,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 3.06,
+    "errore_lunghezze_p95_pct": 10.39,
+    "rapporto_area_2d_3d": 0.9743
+   },
+   "dxf": "dxf/puntale.dxf",
+   "svg": "svg/puntale.svg"
+  },
+  {
+   "nome": "bacchetta",
+   "titolo": "Bacchetta posteriore",
+   "materiale": "vitello box 1,3 mm",
+   "spessore_mm": 1.3,
+   "quantita_paio": 2,
+   "area_cm2": 16.0,
+   "area_paio_dm2": 0.32,
+   "ingombro_mm": [
+    28.9,
+    69.9
+   ],
+   "perimetro_taglio_mm": 187.8,
+   "errore_sviluppo_pct": 0.93,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 0.93,
+    "errore_lunghezze_p95_pct": 2.0,
+    "rapporto_area_2d_3d": 0.9981
+   },
+   "dxf": "dxf/bacchetta.dxf",
+   "svg": "svg/bacchetta.svg"
+  },
+  {
+   "nome": "fodera_linguetta",
+   "titolo": "Fodera linguetta",
+   "materiale": "pelle fodera (vitello) 0,8 mm",
+   "spessore_mm": 0.8,
+   "quantita_paio": 2,
+   "area_cm2": 47.8,
+   "area_paio_dm2": 0.96,
+   "ingombro_mm": [
+    111.4,
+    48.7
+   ],
+   "perimetro_taglio_mm": 296.1,
+   "errore_sviluppo_pct": 1.15,
+   "distorsione": {
+    "errore_lunghezze_medio_pct": 1.15,
+    "errore_lunghezze_p95_pct": 3.57,
+    "rapporto_area_2d_3d": 0.9823
+   },
+   "dxf": "dxf/fodera_linguetta.dxf",
+   "svg": "svg/fodera_linguetta.svg"
+  },
+  {
+   "nome": "suola",
+   "titolo": "Suola",
+   "materiale": "cuoio da suola 5 mm",
+   "spessore_mm": 5.0,
+   "quantita_paio": 2,
+   "area_cm2": 237.2,
+   "area_paio_dm2": 4.74,
+   "ingombro_mm": [
+    291.2,
+    109.4
+   ],
+   "perimetro_taglio_mm": 678.6,
+   "errore_sviluppo_pct": null,
+   "distorsione": null,
+   "dxf": "dxf/suola.dxf",
+   "svg": "svg/suola.svg"
+  },
+  {
+   "nome": "tacco_alzo",
+   "titolo": "Alzo tacco",
+   "materiale": "cuoio da suola 4,5-5 mm",
+   "spessore_mm": 4.75,
+   "quantita_paio": 8,
+   "area_cm2": 52.2,
+   "area_paio_dm2": 4.18,
+   "ingombro_mm": [
+    77.4,
+    75.9
+   ],
+   "perimetro_taglio_mm": 274.3,
+   "errore_sviluppo_pct": null,
+   "distorsione": null,
+   "dxf": "dxf/tacco_alzo.dxf",
+   "svg": "svg/tacco_alzo.svg"
+  },
+  {
+   "nome": "sopratacco",
+   "titolo": "Sopratacco",
+   "materiale": "gomma 6 mm",
+   "spessore_mm": 6.0,
+   "quantita_paio": 2,
+   "area_cm2": 52.2,
+   "area_paio_dm2": 1.04,
+   "ingombro_mm": [
+    77.4,
+    75.9
+   ],
+   "perimetro_taglio_mm": 274.3,
+   "errore_sviluppo_pct": null,
+   "distorsione": null,
+   "dxf": "dxf/sopratacco.dxf",
+   "svg": "svg/sopratacco.svg"
+  },
+  {
+   "nome": "guardolo",
+   "titolo": "Guardolo 360°",
+   "materiale": "cuoio per guardolo 3 mm",
+   "spessore_mm": 3.0,
+   "quantita_paio": 2,
+   "area_cm2": 77.3,
+   "area_paio_dm2": 1.55,
+   "ingombro_mm": [
+    644.1,
+    12.0
+   ],
+   "perimetro_taglio_mm": 1312.2,
+   "errore_sviluppo_pct": null,
+   "distorsione": null,
+   "dxf": "dxf/guardolo.dxf",
+   "svg": "svg/guardolo.svg"
+  }
+ ],
+ "consumi_per_materiale": {
+  "cuoio/cartone fibra": {
+   "netto_dm2": 3.72,
+   "lordo_dm2": 4.09
+  },
+  "pelle fodera": {
+   "netto_dm2": 11.25,
+   "lordo_dm2": 12.94
+  },
+  "vitello box": {
+   "netto_dm2": 12.1,
+   "lordo_dm2": 14.52
+  },
+  "termoplastico / cuoio": {
+   "netto_dm2": 1.85,
+   "lordo_dm2": 2.03
+  },
+  "termoadesivo": {
+   "netto_dm2": 1.8,
+   "lordo_dm2": 1.99
+  },
+  "cuoio da suola": {
+   "netto_dm2": 8.92,
+   "lordo_dm2": 9.82
+  },
+  "gomma": {
+   "netto_dm2": 1.04,
+   "lordo_dm2": 1.15
+  },
+  "cuoio per guardolo": {
+   "netto_dm2": 1.55,
+   "lordo_dm2": 1.7
+  }
+ },
+ "controllo_cuciture": [
+  {
+   "controllo": "cucitura posteriore quartieri (esterno / interno)",
+   "a_mm": 53.5,
+   "b_mm": 53.5,
+   "differenza_mm": -0.0,
+   "differenza_pct": -0.0
+  },
+  {
+   "controllo": "cucitura posteriore fodere (esterno / interno)",
+   "a_mm": 53.5,
+   "b_mm": 53.5,
+   "differenza_mm": -0.0,
+   "differenza_pct": -0.0
+  },
+  {
+   "controllo": "bordo mascherina / linea mascherina sui quartieri",
+   "a_mm": 178.0,
+   "b_mm": 175.1,
+   "differenza_mm": 2.9,
+   "differenza_pct": 1.7
+  },
+  {
+   "controllo": "bordo puntale / linea puntale sulla mascherina",
+   "a_mm": 133.9,
+   "b_mm": 131.7,
+   "differenza_mm": 2.1,
+   "differenza_pct": 1.6
+  },
+  {
+   "controllo": "cucitura fodere quartiere / linea sulla fodera avampiede",
+   "a_mm": 185.2,
+   "b_mm": 184.3,
+   "differenza_mm": 0.9,
+   "differenza_pct": 0.5
+  }
+ ]
+}

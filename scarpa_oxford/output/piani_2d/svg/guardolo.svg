@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="664.1mm" height="32.0mm" viewBox="0 0 664.10 32.00">
+<title>Guardolo 360° - Oxford tg 42</title>
+<g id="TAGLIO" fill="none" stroke="#111111" stroke-width="0.32">
+<polyline points="10.00,22.00 10.00,10.00 654.10,10.00 654.10,22.00 10.00,22.00"/>
+</g>
+<g id="MONTAGGIO" fill="none" stroke="#1f5fae" stroke-width="0.18" stroke-dasharray="0.6 1.2">
+</g>
+<g id="CUCITURA" fill="none" stroke="#b03a2e" stroke-width="0.18" stroke-dasharray="2.5 1.2">
+</g>
+<g id="SCARNITURA" fill="none" stroke="#7d7d7d" stroke-width="0.16" stroke-dasharray="3 1 0.6 1">
+</g>
+<g id="RIFERIMENTO" fill="none" stroke="#1e8449" stroke-width="0.21">
+</g>
+<g id="ASSE" fill="none" stroke="#7d3c98" stroke-width="0.18" stroke-dasharray="5 1.2 1.2 1.2">
+</g>
+<g id="FORI" fill="none" stroke="#111111" stroke-width="0.21">
+</g>
+<g id="TACCHE" fill="none" stroke="#111111" stroke-width="0.32">
+</g>
+<g id="TESTO" fill="none" stroke="#222222" stroke-width="0.18">
+</g>
+<g id="FORI" fill="none" stroke="#111" stroke-width="0.2">
+</g>
+<g id="TESTO" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#222">
+<text x="332.05" y="10.40" font-size="4.00">GUARDOLO 360°</text>
+<text x="332.05" y="16.71" font-size="2.60">Oxford cap-toe tg 42 - destra</text>
+<text x="332.05" y="21.13" font-size="2.60">cuoio per guardolo 3 mm</text>
+<text x="332.05" y="25.55" font-size="2.60">tagliare 2 per paio (dx + sx speculare)</text>
+<text x="332.05" y="29.90" font-size="2.40">striscia 12 x 644 mm (giunta 10 mm al tallone)</text>
+<polyline points="317.05,34.00 347.05,34.00" fill="none" stroke="#222" stroke-width="0.3"/>
+<polyline points="343.05,32.00 347.05,34.00 343.05,36.00" fill="none" stroke="#222" stroke-width="0.3"/>
+<text x="332.05" y="31.00" font-size="2.2">verso del tiro</text>
+</g></svg>

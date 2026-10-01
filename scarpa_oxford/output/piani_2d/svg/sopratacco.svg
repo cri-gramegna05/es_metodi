@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97.4mm" height="95.9mm" viewBox="0 0 97.37 95.86">
+<title>Sopratacco - Oxford tg 42</title>
+<g id="TAGLIO" fill="none" stroke="#111111" stroke-width="0.32">
+<polyline points="10.00,39.66 10.52,35.45 11.09,33.14 11.71,31.36 12.73,29.04 13.89,26.96 15.95,24.01 18.08,21.58 20.28,19.45 23.29,17.07 26.01,15.31 29.10,13.67 32.62,12.16 35.80,11.15 38.89,10.49 40.60,10.25 42.74,10.06 45.31,10.00 73.83,10.62 87.37,11.01 87.37,85.86 73.09,84.76 44.65,83.78 41.53,83.51 38.80,83.06 35.79,82.31 33.58,81.58 30.55,80.29 27.91,78.97 25.40,77.48 23.26,76.00 21.14,74.30 18.59,71.91 16.46,69.52 14.45,66.78 13.26,64.80 12.20,62.61 11.14,59.78 10.54,57.37 10.01,53.16 10.00,39.66"/>
+</g>
+<g id="MONTAGGIO" fill="none" stroke="#1f5fae" stroke-width="0.18" stroke-dasharray="0.6 1.2">
+</g>
+<g id="CUCITURA" fill="none" stroke="#b03a2e" stroke-width="0.18" stroke-dasharray="2.5 1.2">
+</g>
+<g id="SCARNITURA" fill="none" stroke="#7d7d7d" stroke-width="0.16" stroke-dasharray="3 1 0.6 1">
+</g>
+<g id="RIFERIMENTO" fill="none" stroke="#1e8449" stroke-width="0.21">
+</g>
+<g id="ASSE" fill="none" stroke="#7d3c98" stroke-width="0.18" stroke-dasharray="5 1.2 1.2 1.2">
+</g>
+<g id="FORI" fill="none" stroke="#111111" stroke-width="0.21">
+</g>
+<g id="TACCHE" fill="none" stroke="#111111" stroke-width="0.32">
+</g>
+<g id="TESTO" fill="none" stroke="#222222" stroke-width="0.18">
+</g>
+<g id="FORI" fill="none" stroke="#111" stroke-width="0.2">
+</g>
+<g id="TESTO" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#222">
+<text x="48.97" y="41.39" font-size="4.00">SOPRATACCO</text>
+<text x="48.97" y="47.70" font-size="2.60">Oxford cap-toe tg 42 - destra</text>
+<text x="48.97" y="52.12" font-size="2.60">gomma 6 mm</text>
+<text x="48.97" y="56.54" font-size="2.60">tagliare 2 per paio (dx + sx speculare)</text>
+<polyline points="33.97,64.99 63.97,64.99" fill="none" stroke="#222" stroke-width="0.3"/>
+<polyline points="59.97,62.99 63.97,64.99 59.97,66.99" fill="none" stroke="#222" stroke-width="0.3"/>
+<text x="48.97" y="61.99" font-size="2.2">verso del tiro</text>
+</g></svg>
