@@ -150,10 +150,11 @@ def anello(p, n_punti):
     return y, z
 
 
-def genera(n_stazioni=220, n_punti=128):
+def genera(n_stazioni=220, n_punti=128, uniformita=0.0):
+    """uniformita' 0 = stazioni a coseno (fitte alle estremita'), 1 = uniformi."""
     L = LUNGHEZZA_BASE
     t = np.linspace(0, 1, n_stazioni + 2)[1:-1]
-    xs = L * (1 - np.cos(np.pi * t)) / 2      # piu' fitto alle estremita'
+    xs = L * ((1 - uniformita) * (1 - np.cos(np.pi * t)) / 2 + uniformita * t)
 
     vert = [[0.0, pchip(CENTRO, 0.0), Z_SPERONE]]
     for x in xs:

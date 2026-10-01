@@ -1,0 +1,75 @@
+<!doctype html>
+<!-- Rendering delle anteprime (three.js, headless). Uso: vedi shot.mjs -->
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#f4f1ec;overflow:hidden;font:600 13px system-ui,sans-serif}
+.lab{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.85);padding:2px 6px;border-radius:4px;color:#222;white-space:nowrap;border:1px solid #bbb}
+#t{position:absolute;left:14px;top:10px;font-size:16px;color:#333}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="t"></div>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
+const q = new URLSearchParams(location.search);
+const W = +q.get('w')||1200, H = +q.get('h')||700;
+const r = new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+r.setSize(W,H); r.setPixelRatio(1); r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure=1.1;
+r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(r.domElement);
+const sc = new THREE.Scene(); sc.background = new THREE.Color(0xf4f1ec);
+sc.add(new THREE.HemisphereLight(0xffffff, 0x8a7a6a, 1.4));
+const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(150,-250,400); sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048); Object.assign(sun.shadow.camera,{left:-250,right:250,top:250,bottom:-250,near:1,far:1500});
+sc.add(sun); const fill = new THREE.DirectionalLight(0xffffff,1.1); fill.position.set(-150,220,-300); sc.add(fill);
+const g = await new GLTFLoader().loadAsync(q.get('glb'));
+const root = g.scene; root.rotation.x = -Math.PI/2; // Z-up -> Y-up
+const nodes = [];
+root.traverse(o=>{ if(o.isMesh){ o.geometry = toCreasedNormals(o.geometry, 0.6);
+  const c = o.geometry.attributes.color; let col = new THREE.Color(0.5,0.5,0.5);
+  if(c){ col = new THREE.Color().setRGB(c.getX(0),c.getY(0),c.getZ(0), THREE.SRGBColorSpace); o.geometry.deleteAttribute('color'); }
+  const pelle = /quartiere_|mascherina|puntale|linguetta|bacchetta/.test(o.name) && !/fodera|rinforzo/.test(o.name);
+  o.material = new THREE.MeshStandardMaterial({color: col, roughness: pelle?0.38:0.75, metalness:0.0});
+  o.castShadow = o.receiveShadow = true; nodes.push(o);} });
+sc.add(root);
+const hide = (q.get('hide')||'').split(',').filter(Boolean);
+nodes.forEach(o=>{ if(hide.some(h=>o.name.startsWith(h))) o.visible=false; });
+// colori distinti per l'esploso
+const pal = {puntale:0xc0392b, mascherina:0xe67e22, quartiere_esterno:0x2e86c1, quartiere_interno:0x5dade2,
+ bacchetta:0x8e44ad, linguetta:0x27ae60, fodera_avampiede:0xf5cba7, fodera_quartiere_esterno:0xd7bde2, fodera_quartiere_interno:0xaed6f1,
+ contrafforte:0x7f8c8d, rinforzo_puntale:0x95a5a6, sottopiede:0xd4ac0d};
+const ESPLOSI = {
+ tomaia: {puntale:[80,0,0], mascherina:[35,0,40], quartiere_esterno:[-10,-80,0], quartiere_interno:[-45,95,95],
+          bacchetta:[-80,-10,0], linguetta:[70,0,125]},
+ interno: {fodera_avampiede:[45,0,30], fodera_quartiere_esterno:[-10,-80,0], fodera_quartiere_interno:[-10,90,75],
+          contrafforte:[-80,0,0], rinforzo_puntale:[125,0,40], sottopiede:[0,0,-75]}};
+const labels = q.get('labels')==='1';
+const es = q.get('esploso');
+if(es){
+  const expl = ESPLOSI[es];
+  nodes.forEach(o=>{ const base = o.name.replace(/^cuciture_/,'');
+    const k = Object.keys(expl).find(k=>base===k);
+    if(k){ if(o.name===k) o.material = new THREE.MeshStandardMaterial({color:pal[k],roughness:0.6});
+           o.position.set(...expl[k]); }
+    else o.visible = false; });
+}
+const box = new THREE.Box3().setFromObject(root); const ctr = box.getCenter(new THREE.Vector3());
+const size = box.getSize(new THREE.Vector3()).length();
+// pavimento
+const fl = new THREE.Mesh(new THREE.PlaneGeometry(4000,4000), new THREE.ShadowMaterial({opacity:0.18}));
+fl.rotation.x=-Math.PI/2; fl.position.y = box.min.y; fl.receiveShadow=true; if(!es) sc.add(fl);
+const az = (+q.get('az')||0)*Math.PI/180, el = (+q.get('el')||10)*Math.PI/180, zoom = +q.get('zoom')||1;
+const cam = new THREE.OrthographicCamera(-W/2,W/2,H/2,-H/2,-5000,5000);
+const d = 1000; cam.position.set(ctr.x + d*Math.cos(el)*Math.cos(az), ctr.y + d*Math.sin(el), ctr.z - d*Math.cos(el)*Math.sin(az));
+cam.lookAt(ctr); cam.zoom = zoom * Math.min(W,H)/size*1.25; cam.updateProjectionMatrix();
+r.render(sc,cam);
+document.getElementById('t').textContent = q.get('title')||'';
+if(labels){
+  const nomi = {puntale:'Puntale',mascherina:'Mascherina',quartiere_esterno:'Quartiere esterno',quartiere_interno:'Quartiere interno',
+   bacchetta:'Bacchetta',linguetta:'Linguetta',fodera_avampiede:'Fodera avampiede',fodera_quartiere_esterno:'Fodera quart. esterno',
+   fodera_quartiere_interno:'Fodera quart. interno',contrafforte:'Contrafforte',rinforzo_puntale:'Rinforzo puntale',sottopiede:'Sottopiede'};
+  nodes.filter(o=>o.visible && nomi[o.name]).forEach(o=>{ const b = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());
+    b.project(cam); const el = document.createElement('div'); el.className='lab'; el.textContent=nomi[o.name];
+    el.style.left = ((b.x+1)/2*W)+'px'; el.style.top = ((1-b.y)/2*H)+'px'; document.body.appendChild(el); });
+}
+window.PRONTO = true;
+</script></body></html>

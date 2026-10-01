@@ -1,0 +1,9 @@
+{
+  "name": "anteprima-oxford",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "playwright-core": "^1.55.0",
+    "three": "0.160.0"
+  }
+}

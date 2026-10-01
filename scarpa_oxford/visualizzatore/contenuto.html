@@ -1,0 +1,372 @@
+<title>Oxford 42 cap-toe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: banco di modelleria. Scena 3D a sinistra, scheda tecnica a destra (sotto su telefono). */
+:root {
+  --bg: #e9ecef;          /* grigio cartoncino, leggermente freddo */
+  --surface: #f8f9fa;
+  --ink: #1d232a;
+  --muted: #5d6773;
+  --line: #cfd5dc;
+  --accent: #2c64a8;      /* gesso da sarto blu */
+  --accent-soft: #dbe6f3;
+  --stage: #dfe3e7;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181d; --surface: #1b2027; --ink: #e6e9ed; --muted: #98a2ad; --line: #2c333c;
+    --accent: #78a9e6; --accent-soft: #22324a; --stage: #1a1f25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14181d; --surface: #1b2027; --ink: #e6e9ed; --muted: #98a2ad; --line: #2c333c;
+  --accent: #78a9e6; --accent-soft: #22324a; --stage: #1a1f25; color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px;
+  display: grid; grid-template-rows: auto 1fr; padding-inline: 16px; padding-block: 12px 16px; gap: 12px;
+  box-sizing: border-box;
+}
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: 30px; letter-spacing: .01em; margin: 0; text-wrap: balance; }
+.sotto { color: var(--muted); font-size: 13px; }
+main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; min-height: 0; }
+#scena {
+  position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 6px;
+  min-height: 420px; overflow: hidden; touch-action: none;
+}
+#scena canvas { display: block; width: 100%; height: 100%; }
+#stato {
+  position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted);
+  font-family: var(--f-data); font-size: 13px; pointer-events: none;
+}
+.viste {
+  position: absolute; left: 10px; top: 10px; display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 20px);
+}
+.viste button, .seg button {
+  font: 500 12px var(--f-body); color: var(--ink); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 4px; padding: 5px 10px; cursor: pointer;
+}
+.viste button:hover, .seg button:hover { border-color: var(--accent); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); }
+.aiuto { position: absolute; right: 10px; bottom: 8px; color: var(--muted); font-size: 11px; }
+aside {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: auto;
+  display: flex; flex-direction: column; min-height: 0;
+}
+section { padding: 12px 14px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+section:last-child { border-bottom: 0; }
+h2 {
+  font-family: var(--f-display); font-weight: 600; font-size: 13px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin: 0;
+}
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.riga { display: flex; align-items: center; gap: 10px; }
+input[type="range"] { flex: 1; accent-color: var(--accent); }
+.val { font-family: var(--f-data); font-size: 12px; color: var(--muted); width: 3.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.gruppo { display: grid; gap: 2px; }
+.gruppo h3 { font: 600 12px var(--f-body); margin: 6px 0 2px; color: var(--ink); }
+.pezzo { display: grid; grid-template-columns: auto 12px 1fr auto; align-items: center; gap: 8px; padding: 3px 4px; border-radius: 4px; }
+.pezzo:hover { background: var(--accent-soft); }
+.pezzo.sel { background: var(--accent-soft); outline: 1px solid var(--accent); }
+.pezzo input { margin: 0; accent-color: var(--accent); }
+.pezzo button { all: unset; cursor: pointer; font-size: 13px; }
+.pezzo button:focus-visible { outline: 2px solid var(--accent); }
+.sw { width: 12px; height: 12px; border-radius: 2px; border: 1px solid var(--line); }
+.mm { font-family: var(--f-data); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+#scheda .nome { font-family: var(--f-display); font-size: 22px; font-weight: 600; margin: 0; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
+dt { color: var(--muted); font-size: 12px; }
+dd { margin: 0; font-size: 13px; }
+dd.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); padding: 4px 4px 4px 0; }
+td { border-bottom: 1px solid var(--line); padding: 4px 4px 4px 0; vertical-align: top; }
+td.n { font-family: var(--f-data); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nota { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 0; }
+@media (max-width: 820px) {
+  html, body { height: auto; }
+  main { grid-template-columns: minmax(0, 1fr); }
+  #scena { min-height: 0; aspect-ratio: 4 / 3.2; max-width: 100%; }
+  aside { overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header>
+  <h1>Oxford 42 cap-toe</h1>
+  <span class="sotto">Allacciatura chiusa, 5 occhielli · forma uomo tg 42 (punto Paris) · tacco 25 mm · guardolo 360°</span>
+</header>
+<main>
+  <div id="scena">
+    <div id="stato">Caricamento del modello 3D…</div>
+    <div class="viste" role="group" aria-label="Viste">
+      <button type="button" data-vista="esterno">Esterno</button>
+      <button type="button" data-vista="interno">Interno</button>
+      <button type="button" data-vista="trequarti">Tre quarti</button>
+      <button type="button" data-vista="pianta">Pianta</button>
+      <button type="button" data-vista="retro">Retro</button>
+      <button type="button" data-vista="fondo">Suola</button>
+    </div>
+    <div class="aiuto">Trascina per ruotare · rotella o pizzico per zoom · clic su un pezzo per la scheda</div>
+  </div>
+  <aside>
+    <section>
+      <h2>Esploso</h2>
+      <div class="riga">
+        <input type="range" id="esploso" min="0" max="100" value="0" aria-label="Esploso">
+        <span class="val" id="esploso-val">0%</span>
+      </div>
+      <h2>Colori</h2>
+      <div class="seg" role="group" aria-label="Colori">
+        <button type="button" id="col-reali" aria-pressed="true">Pellami</button>
+        <button type="button" id="col-pezzi" aria-pressed="false">Per pezzo</button>
+      </div>
+    </section>
+    <section id="scheda">
+      <h2>Scheda pezzo</h2>
+      <p class="nota">Seleziona un pezzo dall'elenco o con un clic sul modello: qui compaiono materiale, spessore, area e i bordi con i margini da aggiungere nello sviluppo 2D.</p>
+    </section>
+    <section>
+      <h2>Pezzi</h2>
+      <div id="elenco"></div>
+    </section>
+  </aside>
+</main>
+
+<script type="importmap">
+{"imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
+
+const GLB = 'oxford_42_dx.glb', DATI = 'pezzi.json';
+
+// Gruppi dell'elenco, colori "per pezzo", vettori dell'esploso (mm, X punta, Y interno, Z alto)
+const GRUPPI = [
+  ['Tomaia', ['puntale', 'mascherina', 'quartiere_esterno', 'quartiere_interno', 'bacchetta', 'linguetta']],
+  ['Fodere e rinforzi', ['fodera_avampiede', 'fodera_quartiere_esterno', 'fodera_quartiere_interno', 'contrafforte', 'rinforzo_puntale', 'sottopiede']],
+  ['Fondo', ['guardolo', 'suola', 'tacco', 'sopratacco']],
+];
+const NOMI_FONDO = {
+  guardolo: ['Guardolo', 'cuoio 3 mm, giro completo 360°'],
+  suola: ['Suola', 'cuoio 5 mm'],
+  tacco: ['Tacco (4 alzi)', 'cuoio a strati'],
+  sopratacco: ['Sopratacco', 'gomma 6 mm'],
+};
+const PALETTE = {
+  puntale: '#c0392b', mascherina: '#e67e22', quartiere_esterno: '#2e86c1', quartiere_interno: '#5dade2',
+  bacchetta: '#8e44ad', linguetta: '#27ae60', fodera_avampiede: '#f0c9a0', fodera_quartiere_esterno: '#d7bde2',
+  fodera_quartiere_interno: '#aed6f1', contrafforte: '#7f8c8d', rinforzo_puntale: '#a3aeb5', sottopiede: '#d4ac0d',
+  guardolo: '#6e2c00', suola: '#4a3426', tacco: '#9c6b3f', sopratacco: '#2b2b2b',
+};
+const ESPLOSO = {
+  puntale: [85, 0, 10], mascherina: [40, 0, 60], quartiere_esterno: [-10, -90, 15], quartiere_interno: [-10, 90, 15],
+  bacchetta: [-90, 0, 15], linguetta: [5, 0, 130], fodera_avampiede: [20, 0, 18], fodera_quartiere_esterno: [-8, -45, 5],
+  fodera_quartiere_interno: [-8, 45, 5], contrafforte: [-45, 0, 0], rinforzo_puntale: [50, 0, 4], sottopiede: [0, 0, -30],
+  guardolo: [0, 0, -55], suola: [0, 0, -80], tacco: [0, 0, -105], sopratacco: [0, 0, -130],
+};
+const VISTE = {esterno: [-90, 4], interno: [90, 4], trequarti: [-38, 24], pianta: [-90, 88], retro: [200, 14], fondo: [-90, -88]};
+
+const scena = document.getElementById('scena'), stato = document.getElementById('stato');
+const renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+scena.prepend(renderer.domElement);
+const sc = new THREE.Scene();
+sc.add(new THREE.HemisphereLight(0xffffff, 0x8a7a6a, 1.4));
+const sole = new THREE.DirectionalLight(0xffffff, 2.2); sole.position.set(150, 400, 250); sc.add(sole);
+const luce2 = new THREE.DirectionalLight(0xffffff, 0.8); luce2.position.set(-200, 150, -250); sc.add(luce2);
+const cam = new THREE.PerspectiveCamera(28, 1, 1, 5000);
+const ctrl = new OrbitControls(cam, renderer.domElement);
+ctrl.enableDamping = true; ctrl.dampingFactor = 0.08;
+
+function coloreScena() {
+  sc.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--stage').trim());
+}
+coloreScena();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', coloreScena);
+new MutationObserver(coloreScena).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+
+function dimensiona() {
+  const r = scena.getBoundingClientRect();
+  renderer.setSize(r.width, r.height, false);
+  cam.aspect = r.width / Math.max(r.height, 1); cam.updateProjectionMatrix();
+}
+new ResizeObserver(dimensiona).observe(scena);
+
+// chiave del pezzo a cui appartiene un nodo (cuciture, occhielli, lacci, alzi seguono il loro pezzo)
+function chiave(nome) {
+  if (nome.startsWith('cuciture_')) return nome.slice(9);
+  if (nome.startsWith('tacco_alzo')) return 'tacco';
+  if (nome.startsWith('occhiello_')) return (+nome.split('_')[1] % 2) ? 'quartiere_esterno' : 'quartiere_interno';
+  if (nome.startsWith('laccio_')) return 'lacci';
+  return nome;
+}
+
+const radice = new THREE.Group(); radice.rotation.x = -Math.PI / 2; sc.add(radice);
+const perPezzo = {};   // chiave -> [mesh]
+const centro = new THREE.Vector3(); let raggio = 200;
+let dati = null, selezionato = null, modoColori = 'reali', esp = 0;
+
+const [gltf, json] = await Promise.all([
+  new GLTFLoader().loadAsync(GLB),
+  fetch(DATI).then(r => r.json()).catch(() => null),
+]).catch(e => { stato.textContent = 'Impossibile caricare il modello: ' + e.message; throw e; });
+dati = json;
+radice.add(gltf.scene);
+gltf.scene.traverse(o => {
+  if (!o.isMesh) return;
+  o.geometry = toCreasedNormals(o.geometry, 0.6);
+  const c = o.geometry.attributes.color;
+  const col = c ? new THREE.Color().setRGB(c.getX(0), c.getY(0), c.getZ(0), THREE.SRGBColorSpace) : new THREE.Color(0x888888);
+  if (c) o.geometry.deleteAttribute('color');
+  const k = chiave(o.name);
+  const pelle = ['puntale', 'mascherina', 'quartiere_esterno', 'quartiere_interno', 'bacchetta', 'linguetta'].includes(o.name);
+  o.userData = {k, reale: col, pelle};
+  o.material = new THREE.MeshStandardMaterial({color: col, roughness: pelle ? 0.38 : 0.75});
+  (perPezzo[k] ||= []).push(o);
+});
+const box = new THREE.Box3().setFromObject(radice);
+box.getCenter(centro); raggio = box.getSize(new THREE.Vector3()).length() / 2;
+ctrl.target.copy(centro);
+stato.hidden = true;
+dimensiona(); vista('trequarti', false);
+costruisciElenco();
+
+function vista(nome) {
+  const [az, el] = VISTE[nome].map(a => a * Math.PI / 180);
+  const d = raggio / Math.tan(cam.fov * Math.PI / 360) * 1.05;
+  cam.position.set(centro.x + d * Math.cos(el) * Math.cos(az), centro.y + d * Math.sin(el), centro.z - d * Math.cos(el) * Math.sin(az));
+  ctrl.target.copy(centro); ctrl.update();
+}
+document.querySelectorAll('[data-vista]').forEach(b => b.addEventListener('click', () => vista(b.dataset.vista)));
+
+function applicaEsploso() {
+  for (const [k, ms] of Object.entries(perPezzo)) {
+    const v = ESPLOSO[k] || [0, 0, 0];
+    ms.forEach(m => {
+      m.position.set(v[0] * esp, v[1] * esp, v[2] * esp);
+      if (k === 'lacci') m.visible = esp < 0.02 && visibile.linguetta !== false;
+    });
+  }
+}
+const visibile = {};
+document.getElementById('esploso').addEventListener('input', e => {
+  esp = e.target.value / 100; document.getElementById('esploso-val').textContent = e.target.value + '%'; applicaEsploso();
+});
+
+function applicaColori() {
+  for (const ms of Object.values(perPezzo)) ms.forEach(m => {
+    const pal = PALETTE[m.userData.k];
+    const principale = !m.name.startsWith('cuciture_') && !m.name.startsWith('occhiello_');
+    m.material.color.copy(modoColori === 'pezzi' && pal && principale ? new THREE.Color(pal) : m.userData.reale);
+    m.material.emissive.set(m.userData.k === selezionato ? 0x2c64a8 : 0x000000);
+    m.material.emissiveIntensity = m.userData.k === selezionato ? 0.45 : 0;
+  });
+  document.querySelectorAll('.pezzo').forEach(r => r.classList.toggle('sel', r.dataset.k === selezionato));
+  document.querySelectorAll('.pezzo .sw').forEach(s => {
+    const k = s.closest('.pezzo').dataset.k, m = perPezzo[k]?.find(m => m.name === k || m.name.startsWith('tacco_alzo'));
+    s.style.background = modoColori === 'pezzi' ? PALETTE[k] : '#' + (m ? m.userData.reale.getHexString(THREE.SRGBColorSpace) : '888888');
+  });
+}
+for (const [id, modo] of [['col-reali', 'reali'], ['col-pezzi', 'pezzi']]) {
+  document.getElementById(id).addEventListener('click', () => {
+    modoColori = modo;
+    document.getElementById('col-reali').setAttribute('aria-pressed', modo === 'reali');
+    document.getElementById('col-pezzi').setAttribute('aria-pressed', modo === 'pezzi');
+    applicaColori();
+  });
+}
+
+function infoPezzo(k) { return dati?.pezzi.find(p => p.nome === k); }
+
+function costruisciElenco() {
+  const el = document.getElementById('elenco');
+  for (const [titolo, chiavi] of GRUPPI) {
+    const g = document.createElement('div'); g.className = 'gruppo';
+    g.innerHTML = `<h3>${titolo}</h3>`;
+    for (const k of chiavi) {
+      if (!perPezzo[k]) continue;
+      const p = infoPezzo(k);
+      const nome = p ? p.descrizione : NOMI_FONDO[k][0];
+      const r = document.createElement('div'); r.className = 'pezzo'; r.dataset.k = k;
+      r.innerHTML = `<input type="checkbox" id="vis-${k}" checked aria-label="Mostra ${nome}"><span class="sw"></span>` +
+        `<button type="button">${nome}</button><span class="mm">${p ? p.spessore_mm.toFixed(1) + ' mm' : ''}</span>`;
+      r.querySelector('input').addEventListener('change', e => {
+        visibile[k] = e.target.checked;
+        perPezzo[k].forEach(m => m.visible = e.target.checked);
+        if (k === 'linguetta') applicaEsploso();
+      });
+      r.querySelector('button').addEventListener('click', () => seleziona(k));
+      g.appendChild(r);
+    }
+    el.appendChild(g);
+  }
+  applicaColori();
+}
+
+const lunghezza = pts => pts.slice(1).reduce((s, p, i) => s + Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1], p[2] - pts[i][2]), 0);
+
+function seleziona(k) {
+  selezionato = selezionato === k ? null : k;
+  applicaColori();
+  const s = document.getElementById('scheda');
+  if (!selezionato) { s.innerHTML = '<h2>Scheda pezzo</h2><p class="nota">Seleziona un pezzo dall\'elenco o con un clic sul modello.</p>'; return; }
+  const p = infoPezzo(k);
+  if (!p) {
+    const f = dati?.fondo.find(f => f.nome === k || (k === 'tacco' && f.nome === 'tacco_alzo'));
+    s.innerHTML = `<h2>Scheda pezzo</h2><p class="nome">${NOMI_FONDO[k][0]}</p><dl><dt>Materiale</dt><dd>${NOMI_FONDO[k][1]}</dd>` +
+      (k === 'tacco' ? `<dt>Altezza tacco</dt><dd class="num">${dati?.altezza_tacco_mm ?? 25} mm</dd>` : '') +
+      `<dt>Quantità</dt><dd class="num">2 per paio${k === 'tacco' ? ' × 4 alzi' : ''}</dd></dl>` +
+      `<p class="nota">Il contorno in pianta è in pezzi.json (sezione "fondo").</p>`;
+    return;
+  }
+  const perTipo = {};
+  for (const b of p.bordi) {
+    const t = perTipo[b.tipo] ||= {descr: b.descrizione, margine: b.margine_mm, L: 0};
+    t.L += lunghezza(b.punti);
+  }
+  const righe = Object.entries(perTipo).sort((a, b) => b[1].L - a[1].L).map(([t, v]) =>
+    `<tr><td>${v.descr}</td><td class="n">${v.L.toFixed(0)}</td><td class="n">${v.margine ? '+' + v.margine : '–'}</td></tr>`).join('');
+  const cuc = p.cuciture.map(c => `${c.bordo.replace('_', ' ')}: ${c.distanze_dal_bordo_mm.join(' e ')} mm dal bordo`).join('; ');
+  s.innerHTML = `<h2>Scheda pezzo</h2><p class="nome">${p.descrizione}</p>
+    <dl><dt>Materiale</dt><dd>${p.materiale}</dd>
+    <dt>Spessore</dt><dd class="num">${p.spessore_mm.toFixed(1)} mm</dd>
+    <dt>Quantità</dt><dd class="num">${p.quantita_paio} per paio</dd>
+    <dt>Area su forma</dt><dd class="num">${p.area_superficie_cm2.toFixed(1)} cm²</dd>
+    ${cuc ? `<dt>Cuciture</dt><dd>${cuc}</dd>` : ''}</dl>
+    <div style="overflow-x:auto"><table><thead><tr><th>Bordo</th><th style="text-align:right">mm</th><th style="text-align:right">margine</th></tr></thead><tbody>${righe}</tbody></table></div>
+    <p class="nota">Lunghezze misurate sulla forma. I riporti sono già compresi nel pezzo; il margine di montaggio si aggiunge nello sviluppo 2D.</p>`;
+}
+
+// selezione con clic (senza trascinamento)
+const ray = new THREE.Raycaster(); let giu = null;
+renderer.domElement.addEventListener('pointerdown', e => giu = [e.clientX, e.clientY]);
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!giu || Math.hypot(e.clientX - giu[0], e.clientY - giu[1]) > 4) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  ray.setFromCamera(new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), cam);
+  const hit = ray.intersectObjects(radice.children, true).find(h => h.object.visible);
+  if (hit) {
+    let k = hit.object.userData.k;
+    if (k === 'lacci') k = 'linguetta';
+    seleziona(k);
+  }
+});
+
+renderer.setAnimationLoop(() => { ctrl.update(); renderer.render(sc, cam); });
+</script>
