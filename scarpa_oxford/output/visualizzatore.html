@@ -159,7 +159,14 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
 
-const GLB = 'oxford_42_dx.glb', DATI = 'pezzi.json';
+// modello: GLB accanto alla pagina; in alternativa la stessa scena in glTF JSON
+const MODELLI = ['oxford_42_dx.glb', 'oxford_42_dx.gltf.json'], DATI = 'pezzi.json';
+async function caricaModello() {
+  const loader = new GLTFLoader();
+  for (const url of MODELLI) {
+    try { return await loader.loadAsync(url); } catch (e) { if (url === MODELLI.at(-1)) throw e; }
+  }
+}
 
 // Gruppi dell'elenco, colori "per pezzo", vettori dell'esploso (mm, X punta, Y interno, Z alto)
 const GRUPPI = [
@@ -229,7 +236,7 @@ const centro = new THREE.Vector3(); let raggio = 200;
 let dati = null, selezionato = null, modoColori = 'reali', esp = 0;
 
 const [gltf, json] = await Promise.all([
-  new GLTFLoader().loadAsync(GLB),
+  caricaModello(),
   fetch(DATI).then(r => r.json()).catch(() => null),
 ]).catch(e => { stato.textContent = 'Impossibile caricare il modello: ' + e.message; throw e; });
 dati = json;
