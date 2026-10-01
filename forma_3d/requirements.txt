@@ -1,0 +1,6 @@
+numpy
+trimesh
+scipy
+networkx
+manifold3d
+pillow

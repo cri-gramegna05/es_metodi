@@ -1,0 +1,12 @@
+{
+  "taglia": 42,
+  "lunghezza_mm": 280.0,
+  "larghezza_pianta_mm": 94.0,
+  "larghezza_tallone_mm": 66.4,
+  "altezza_totale_mm": 120.8,
+  "giro_pianta_mm": 252.1,
+  "giro_collo_mm": 240.2,
+  "volume_cm3": 1033.0,
+  "tacco_mm": 25.0,
+  "watertight": true
+}
