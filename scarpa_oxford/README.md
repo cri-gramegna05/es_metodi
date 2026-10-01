@@ -132,6 +132,12 @@ Puntale e rinforzo puntale coprono la punta a doppia curvatura: lo sviluppo ha
 conservate. Prima del taglio in produzione i cartamodelli vanno provati su forma
 (prova in carta o tela).
 
+## Relazione
+
+`relazione/relazione_oxford_42.pdf`: relazione di 10 pagine sul lavoro svolto (forma e 3D in breve,
+piani di taglio 2D in dettaglio). Si rigenera con `python3 relazione/figure.py && python3 relazione/genera_relazione.py`
+(richiede reportlab).
+
 ## Rigenerare
 
 ```bash
